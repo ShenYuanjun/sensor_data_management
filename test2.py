@@ -133,7 +133,7 @@ arguments = {
     'write_registers': 8,
 }
 # log.debug("Read write registeres simulataneously")
-rq = client.readwrite_registers(unit=UNIT, **arguments)
+# rq = client.readwrite_registers(unit=UNIT, **arguments)
 
 adress_register = 0  # 起始寄存器
 length_data = 115  # 数据长度 HEX=73
