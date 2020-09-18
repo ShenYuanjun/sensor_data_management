@@ -22,7 +22,7 @@ async def start_async_test(collection, client):
         'write_address': 1,
         'write_registers': [20] * 8,
     }
-    rq = await client.readwrite_registers(unit=UNIT, **arguments)
+    # rq = await client.readwrite_registers(unit=UNIT, **arguments)
     rr = await client.read_holding_registers(1, 8, unit=UNIT)
 
     document = {'data': rr.registers, "time": datetime.now()}

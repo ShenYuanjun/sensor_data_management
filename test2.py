@@ -74,14 +74,14 @@ from pymodbus.client.sync import ModbusTcpClient as ModbusClient
 
 UNIT = 0x1
 
-client = ModbusClient('192.168.1.253', port=1030)
+client = ModbusClient('192.168.1.82', port=1032)
 # from pymodbus.transaction import ModbusRtuFramer
 # client = ModbusClient('localhost', port=5020, framer=ModbusRtuFramer)
 # client = ModbusClient(method='binary', port='/dev/ptyp0', timeout=1)
 # client = ModbusClient(method='ascii', port='/dev/ptyp0', timeout=1)
-# client = ModbusClient(method='rtu', port='/dev/ptyp0', timeout=1,
-#                       baudrate=9600)
-# client = ModbusClient(method='rtu', port='COM2', timeout=1, baudrate=9600)
+# client = ModbusClient(method='rtu', port='COM2', timeout=1,
+#                       baudrate=115200)
+# client = ModbusClient(method='rtu', port='COM2', timeout=1, baudrate=115200)
 client.connect()
 
 # log.debug("Write to a Coil and read back")
@@ -136,10 +136,13 @@ arguments = {
 # rq = client.readwrite_registers(unit=UNIT, **arguments)
 
 adress_register = 0  # 起始寄存器
-length_data = 115  # 数据长度 HEX=73
+length_data = 64  # 数据长度 HEX=40
 adress_gateway = 0x1  # 云盒地址
-# rr = client.read_holding_registers(adress_register, length_data, unit=adress_gateway)
-rr = client.read_holding_registers(1, 8, unit=UNIT)
+rr = client.read_holding_registers(adress_register, length_data, unit=adress_gateway)
+# rr = client.read_input_registers(adress_register, length_data, unit=adress_gateway)
+# rr = client.read_discrete_inputs(adress_register, length_data, unit=adress_gateway)
+
+# rr = client.read_holding_registers(1, 8, unit=UNIT)
 # assert(not rq.isError())     # test that we are not an error
 # assert(rq.registers == [20]*8)      # test the expected value
 # assert(rr.registers == [20]*8)      # test the expected value

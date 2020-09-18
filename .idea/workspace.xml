@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9eb18216-be5e-4e9f-a532-22c54466fa7e" name="Default Changelist" comment="" />
+    <list default="true" id="9eb18216-be5e-4e9f-a532-22c54466fa7e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo_tcp.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_tcp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test5.py" beforeDir="false" afterPath="$PROJECT_DIR$/test5.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -187,8 +193,8 @@
       <list>
         <item itemvalue="Python.test5" />
         <item itemvalue="Python.demo_serial (1)" />
-        <item itemvalue="Python.demo_tcp (1)" />
         <item itemvalue="Python.test2" />
+        <item itemvalue="Python.demo_tcp (1)" />
         <item itemvalue="Python.demo_serial" />
       </list>
     </recent_temporary>
@@ -220,18 +226,36 @@
       <workItem from="1598926885118" duration="11338000" />
       <workItem from="1599118564371" duration="5564000" />
       <workItem from="1600064479995" duration="9306000" />
-      <workItem from="1600316989283" duration="805000" />
+      <workItem from="1600316989283" duration="1361000" />
+      <workItem from="1600339221147" duration="6960000" />
+      <workItem from="1600394642977" duration="268000" />
     </task>
+    <task id="LOCAL-00001" summary="add readme">
+      <created>1600317978319</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1600317978319</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="add readme" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598779639948">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1598779639948" />
+    <state x="255" y="12" key="CommitChangelistDialog2" timestamp="1600317977517">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="255" y="12" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1600317977517" />
     <state x="360" y="155" key="FileChooserDialogImpl" timestamp="1600317216656">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -264,14 +288,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="170" y="56" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1600317782721" />
-    <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1600081541998">
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2" timestamp="1600317984991">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="775" height="419" key="XDebugger.FullValuePopup/0.0.1536.824@0.0.1536.824" timestamp="1600081541998" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1600316989266">
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1600317984991" />
+    <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1600349404151">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1600316989266" />
+    <state width="775" height="419" key="XDebugger.FullValuePopup/0.0.1536.824@0.0.1536.824" timestamp="1600349404151" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1600394644296">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1600394644296" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1598766999820">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
