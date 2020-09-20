@@ -3,10 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="9eb18216-be5e-4e9f-a532-22c54466fa7e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo_tcp.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_tcp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test5.py" beforeDir="false" afterPath="$PROJECT_DIR$/test5.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo_serial.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo/demo_serial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo_tcp.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo/demo_tcp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mongdb_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo/mongdb_demo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test1.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test3.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test4.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test4.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test5.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test5.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +76,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="demo_serial (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="demo_serial" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="sensor_data_management" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -85,7 +89,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/demo_serial.py" />
+      <option name="SCRIPT_NAME" value="E:\CPS\projects\sensor_data_management\demo\demo_serial.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -107,7 +111,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="E:\CPS\projects\sensor_data_management\demo_serial.py" />
+      <option name="SCRIPT_NAME" value="E:\CPS\projects\sensor_data_management\demo\demo_serial.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -116,7 +120,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="demo_tcp (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="demo_tcp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="sensor_data_management" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -129,7 +133,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/demo_tcp.py" />
+      <option name="SCRIPT_NAME" value="E:\CPS\projects\sensor_data_management\demo\demo_tcp.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -151,7 +155,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test2.py" />
+      <option name="SCRIPT_NAME" value="E:\CPS\projects\sensor_data_management\test\test2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -173,7 +177,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test5.py" />
+      <option name="SCRIPT_NAME" value="E:\CPS\projects\sensor_data_management\test\test5.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -228,7 +232,8 @@
       <workItem from="1600064479995" duration="9306000" />
       <workItem from="1600316989283" duration="1361000" />
       <workItem from="1600339221147" duration="6960000" />
-      <workItem from="1600394642977" duration="268000" />
+      <workItem from="1600394642977" duration="518000" />
+      <workItem from="1600577827767" duration="2989000" />
     </task>
     <task id="LOCAL-00001" summary="add readme">
       <created>1600317978319</created>
@@ -237,7 +242,28 @@
       <option name="project" value="LOCAL" />
       <updated>1600317978319</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add test5 and software for COM server">
+      <created>1600394969004</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1600394969004</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add test5 and software for COM server">
+      <created>1600578866497</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1600578866498</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update the format of data from modbus">
+      <created>1600581236900</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1600581236900</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,17 +271,19 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="add readme" />
+    <MESSAGE value="add test5 and software for COM server" />
+    <MESSAGE value="update the format of data from modbus" />
+    <option name="LAST_COMMIT_MESSAGE" value="update the format of data from modbus" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598779639948">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1598779639948" />
-    <state x="255" y="12" key="CommitChangelistDialog2" timestamp="1600317977517">
+    <state x="255" y="12" key="CommitChangelistDialog2" timestamp="1600581236244">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="255" y="12" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1600317977517" />
+    <state x="255" y="12" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1600581236244" />
     <state x="360" y="155" key="FileChooserDialogImpl" timestamp="1600317216656">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -288,18 +316,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="170" y="56" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1600317782721" />
-    <state x="361" y="146" key="Vcs.Push.Dialog.v2" timestamp="1600317984991">
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2" timestamp="1600581238867">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1600317984991" />
+    <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1600581238867" />
     <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1600349404151">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="775" height="419" key="XDebugger.FullValuePopup/0.0.1536.824@0.0.1536.824" timestamp="1600349404151" />
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1600394644296">
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1600577827758">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1600394644296" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1600577827758" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1598766999820">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
