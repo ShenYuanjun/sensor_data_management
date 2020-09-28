@@ -104,8 +104,8 @@ async def start_async_test(client):
         log.debug("Read write registers simulataneously")
         # rq = await client.readwrite_registers(unit=UNIT, **arguments)
         # rr = await client.read_holding_registers(1, 8, unit=UNIT)
-        adress_register = 0  # 起始寄存器
-        length_data = 115  # 数据长度 HEX=40
+        adress_register = 0x0  # 起始寄存器
+        length_data = 0x40  # 数据长度 HEX=
         adress_gateway = 0x1  # 云盒地址
         rr = await client.read_holding_registers(adress_register, length_data, unit=adress_gateway)
         print('rr: %s' % repr(rr.registers))
@@ -126,7 +126,7 @@ if __name__ == '__main__':
     # ----------------------------------------------------------------------- #
     # socat -d -d PTY,link=/tmp/ptyp0,raw,echo=0,ispeed=9600 PTY,
     # link=/tmp/ttyp0,raw,echo=0,ospeed=9600
-    loop, client = ModbusClient(schedulers.ASYNC_IO, port='COM4',
+    loop, client = ModbusClient(schedulers.ASYNC_IO, port='COM2',
                                 baudrate=115200, method="rtu")
     loop.run_until_complete(start_async_test(client.protocol))
     loop.close()

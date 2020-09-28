@@ -33,7 +33,7 @@ log.setLevel(logging.DEBUG)
 
 
 UNIT = 0x01
-Set.TransactionId = 0x1500
+# Set.TransactionId = 0x1500
 
 async def start_async_test(client):
 
@@ -92,7 +92,7 @@ async def start_async_test(client):
     # rq = await client.readwrite_registers(unit=UNIT, **arguments)
     # rr = await client.read_holding_registers(1, 8, unit=UNIT)
     adress_register = 0  # 起始寄存器
-    length_data = 115  # 数据长度 HEX=40
+    length_data = 0x73  # 数据长度 HEX=
     adress_gateway = 0x1  # 云盒地址
     rr = await client.read_holding_registers(adress_register, length_data, unit=adress_gateway)#, transaction=0x15
     print('rr: %s' % repr(rr.registers))

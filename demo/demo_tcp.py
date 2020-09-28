@@ -1,6 +1,7 @@
 import asyncio
 import os
 from datetime import datetime
+import time
 
 # from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
@@ -16,20 +17,26 @@ UNIT = 0x00
 
 async def start_async_test(collection, client):
 
-    arguments = {
-        'read_address': 1,
-        'read_count': 8,
-        'write_address': 1,
-        'write_registers': [20] * 8,
-    }
+    # arguments = {
+    #     'read_address': 1,
+    #     'read_count': 8,
+    #     'write_address': 1,
+    #     'write_registers': [20] * 8,
+    # }
+    t = time.time()
     # rq = await client.readwrite_registers(unit=UNIT, **arguments)
-    rr = await client.read_holding_registers(1, 8, unit=UNIT)
+    adress_register = 0  # 起始寄存器
+    length_data = 0x40  # 数据长度 HEX=
+    adress_gateway = 0x1  # 云盒地址
+    rr = await client.read_holding_registers(adress_register, length_data, unit=adress_gateway)
+    # rr = await client.read_holding_registers(1, 8, unit=UNIT)
 
     document = {'data': rr.registers, "time": datetime.now()}
     result = await collection.insert_one(document)
     print('inserted: %s' % repr(result.inserted_id))
 
     await asyncio.sleep(1)
+    print('time consuming: ', time.time()-t)
 
 async def countAsyn(collection):
     # collection = await DBconnect()
@@ -42,7 +49,7 @@ if __name__ == '__main__':
     loop = asyncio.new_event_loop()
     # assert not loop.is_running()
     asyncio.set_event_loop(loop)
-    new_loop, client = ModbusClient(schedulers.ASYNC_IO, port=5020, loop=loop)
+    new_loop, client = ModbusClient(schedulers.ASYNC_IO, host='192.168.1.82', port=1032, loop=loop)
     DBclient = motor.motor_asyncio.AsyncIOMotorClient('mongodb://192.168.1.10/',
                                                       username='zgl',
                                                       password='123456',

@@ -13,7 +13,7 @@ log = logging.getLogger()
 log.setLevel(logging.DEBUG)
 
 UNIT = 0x1
-Set.TransactionId = 0x1500
+# Set.TransactionId = 0x1500
 # Set.ProtocolId = 0
 
 try:
@@ -78,12 +78,44 @@ try:
     # log.debug("Read write registeres simulataneously")
     # rq = client.readwrite_registers(unit=UNIT, **arguments)
     log.debug("Read write registers simulataneously")
-    adress_register = 0  # 起始寄存器
-    length_data = 64  # 数据长度 HEX=40
+    adress_register = 64  # 起始寄存器
+    length_data = 0x04  # 数据长度
     adress_gateway = 0x01  # 云盒地址
-    rr = client.read_holding_registers(adress_register, length_data, unit=adress_gateway)
-    print('rr: %s' % repr(rr.registers))
-    print(len(rr.registers))
+    # rr = client.read_holding_registers(adress_register, length_data, unit=adress_gateway)
+    data_all = []
+    for i in range(14):
+        rr = client.read_holding_registers(adress_register*i, length_data, unit=adress_gateway)
+        # rr_hex = hex(rr.registers[0])
+        # type = rr_hex[2:4]
+        # sign = rr_hex[4:5]
+        # pos = int(rr_hex[5:6])
+        rr_hex = '{:04X}'.format(rr.registers[0])
+        type = rr_hex[0:2]
+        sign = rr_hex[2:3]
+        pos = int(rr_hex[3:4])
+        data = {}
+        if type == '81':
+            data['type'] = 'level'
+        elif type == '01':
+            data['type'] = 'temperature'
+        else:
+            print(' illegal type')
+            # Exception
+        if sign == '0':
+            data['data'] = rr.registers[1]/(10**pos)
+        elif sign == '8':
+            data_origin = rr.registers[1]
+            if data_origin >= 32767:
+                data['d ata'] = -(65536 - rr.registers[1]) / (10 ** pos)
+            # data['data'] = -(65536-rr.registers[1])/(10**pos)
+            else:
+                data['data'] = rr.registers[1] / (10 ** pos)
+        else:
+            print('illegal sign')
+            # raise ValueError
+        data_all.append(data)
+        # print('rr: %s' % repr(rr.registers))
+        # print(len(rr.registers))
     # rr = client.read_input_registers(adress_register, length_data, unit=adress_gateway)
     # rr = client.read_discrete_inputs(adress_register, length_data, unit=adress_gateway)
 

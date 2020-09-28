@@ -3,6 +3,7 @@
 '''
 import logging
 from pymodbus.client.sync import ModbusTcpClient as ModbusClient
+from pymodbus.constants import Defaults as Set
 
 # from pymodbus.client.sync import ModbusUdpClient as ModbusClient
 # from pymodbus.client.sync import ModbusSerialClient as ModbusClient
@@ -12,8 +13,9 @@ log = logging.getLogger()
 log.setLevel(logging.DEBUG)
 
 UNIT = 0x1
+Set.TransactionId = 0x1500
 
-client = ModbusClient('192.168.1.82', port=1032)
+client = ModbusClient('192.168.1.82', port=1032, method='rtu')
 # from pymodbus.transaction import ModbusRtuFramer
 # client = ModbusClient('localhost', port=5020, framer=ModbusRtuFramer)
 
@@ -79,6 +81,8 @@ adress_register = 0  # 起始寄存器
 length_data = 64  # 数据长度 HEX=40
 adress_gateway = 0x1  # 云盒地址
 rr = client.read_holding_registers(adress_register, length_data, unit=adress_gateway)
+print('rr: %s' % repr(rr.registers))
+print(len(rr.registers))
 # rr = client.read_input_registers(adress_register, length_data, unit=adress_gateway)
 # rr = client.read_discrete_inputs(adress_register, length_data, unit=adress_gateway)
 
