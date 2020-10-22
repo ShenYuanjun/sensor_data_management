@@ -19,11 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9eb18216-be5e-4e9f-a532-22c54466fa7e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/test_schedule_tcp.py" afterDir="false" />
+    <list default="true" id="9eb18216-be5e-4e9f-a532-22c54466fa7e" name="Default Changelist" comment="add the test program for air condition scheduler">
+      <change afterPath="$PROJECT_DIR$/DatabaseManagement.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/get_serial_number.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProtocolFormat.md" beforeDir="false" afterPath="$PROJECT_DIR$/ProtocolFormat.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_syn_tcp.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_syn_tcp.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +58,7 @@
       <recent name="E:\CPS\projects\sensor_data_management" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.test_schedule_tcp">
+  <component name="RunManager" selected="Python.test_syn_tcp">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="sensor_data_management" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -81,20 +81,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="demo_tcp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="get_serial_number" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="sensor_data_management" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/demo" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/demo/demo_tcp.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/get_serial_number.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -151,6 +148,9 @@
       <module name="sensor_data_management" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -189,20 +189,20 @@
       <item itemvalue="Python.test_asyn_tcp" />
       <item itemvalue="Python.test_syn_tcp" />
       <item itemvalue="Python.test_asyn_serial" />
-      <item itemvalue="Python.demo_tcp" />
       <item itemvalue="Python.test_schedule_tcp" />
+      <item itemvalue="Python.get_serial_number" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test_schedule_tcp" />
         <item itemvalue="Python.test_syn_tcp" />
-        <item itemvalue="Python.demo_tcp" />
-        <item itemvalue="Python.test_asyn_serial" />
+        <item itemvalue="Python.get_serial_number" />
         <item itemvalue="Python.test_asyn_tcp" />
+        <item itemvalue="Python.test_asyn_serial" />
+        <item itemvalue="Python.test_schedule_tcp" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -258,7 +258,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601019210783</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="add the test program for air condition scheduler">
+      <created>1602660175517</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1602660175517</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,7 +318,8 @@
     <MESSAGE value="add test5 and software for COM server" />
     <MESSAGE value="update the format of data from modbus" />
     <MESSAGE value="add test files and pymodbus doc" />
-    <option name="LAST_COMMIT_MESSAGE" value="add test files and pymodbus doc" />
+    <MESSAGE value="add the test program for air condition scheduler" />
+    <option name="LAST_COMMIT_MESSAGE" value="add the test program for air condition scheduler" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598779639948">
@@ -338,32 +346,52 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="455" y="140" key="Github.UntrackedFilesDialog/0.0.1536.824@0.0.1536.824" timestamp="1600317412810" />
-    <state width="1493" height="271" key="GridCell.Tab.0.bottom" timestamp="1598787710805">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1899" height="348" key="GridCell.Tab.0.bottom" timestamp="1603006296834">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="271" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1598787710805" />
-    <state width="1493" height="271" key="GridCell.Tab.0.center" timestamp="1598787710805">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1899" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1603006296834" />
+    <state width="1899" height="348" key="GridCell.Tab.0.center" timestamp="1603006296834">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="271" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1598787710805" />
-    <state width="1493" height="271" key="GridCell.Tab.0.left" timestamp="1598787710804">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1899" height="348" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1603006296834" />
+    <state width="1899" height="348" key="GridCell.Tab.0.left" timestamp="1603006296834">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="271" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1598787710804" />
-    <state width="1493" height="271" key="GridCell.Tab.0.right" timestamp="1598787710805">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1899" height="348" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1603006296834" />
+    <state width="1899" height="348" key="GridCell.Tab.0.right" timestamp="1603006296834">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="271" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1598787710805" />
+    <state width="1899" height="348" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1603006296834" />
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1603006296834">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1603006296834" />
+    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1603006296834">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1603006296834" />
+    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1603006296834">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1603006296834" />
+    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1603006296834">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1603006296834" />
     <state x="281" y="88" width="998" height="709" key="SettingsEditor" timestamp="1601029620260">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="170" y="56" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1600317782721" />
     <state x="281" y="88" width="998" height="709" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601029620260" />
-    <state x="451" y="184" key="Vcs.Push.Dialog.v2" timestamp="1601019215110">
+    <state x="451" y="184" key="Vcs.Push.Dialog.v2" timestamp="1602660178895">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1600581238867" />
-    <state x="451" y="184" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601019215110" />
+    <state x="451" y="184" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1602660178895" />
     <state width="969" height="529" key="XDebugger.FullValuePopup" timestamp="1602657914424">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
