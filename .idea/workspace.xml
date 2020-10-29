@@ -19,7 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9eb18216-be5e-4e9f-a532-22c54466fa7e" name="Default Changelist" comment="update protical format" />
+    <list default="true" id="9eb18216-be5e-4e9f-a532-22c54466fa7e" name="Default Changelist" comment="update protical format">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/get_serial_number.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/get_serial_number.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_syn_tcp.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_syn_tcp.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -267,7 +271,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603363744805</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="update protical format">
+      <created>1603366305555</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1603366305555</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -395,11 +406,11 @@
     </state>
     <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1600581238867" />
     <state x="451" y="184" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603363748497" />
-    <state width="969" height="529" key="XDebugger.FullValuePopup" timestamp="1602657914424">
+    <state width="969" height="529" key="XDebugger.FullValuePopup" timestamp="1603950862413">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="775" height="419" key="XDebugger.FullValuePopup/0.0.1536.824@0.0.1536.824" timestamp="1600349404151" />
-    <state width="969" height="529" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1602657914424" />
+    <state width="969" height="529" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1603950862413" />
     <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1600577827758">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
