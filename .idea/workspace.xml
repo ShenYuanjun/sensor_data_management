@@ -19,8 +19,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9eb18216-be5e-4e9f-a532-22c54466fa7e" name="Default Changelist" comment="change framer from tcp to rtu (test_syn_tcp.py get_serial_number.py)">
+    <list default="true" id="9eb18216-be5e-4e9f-a532-22c54466fa7e" name="Default Changelist" comment="update database management">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DatabaseManagement.js" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseManagement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProtocolFormat.md" beforeDir="false" afterPath="$PROJECT_DIR$/ProtocolFormat.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/demo_tcp.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo/demo_tcp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/get_serial_number.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/get_serial_number.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_asyn_tcp.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_asyn_tcp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_schedule_tcp.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_schedule_tcp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_syn_tcp.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_syn_tcp.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +62,7 @@
       <recent name="E:\CPS\projects\sensor_data_management" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.test_syn_tcp">
+  <component name="RunManager" selected="Python.test_asyn_tcp">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="sensor_data_management" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -70,6 +77,25 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="demo_tcp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="sensor_data_management" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/demo" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/demo/demo_tcp.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -100,35 +126,10 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test_asyn_serial" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="sensor_data_management" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/test_asyn_serial.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="test_asyn_tcp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="sensor_data_management" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -148,9 +149,6 @@
       <module name="sensor_data_management" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -170,9 +168,6 @@
       <module name="sensor_data_management" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -189,19 +184,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.test_asyn_tcp" />
-      <item itemvalue="Python.test_syn_tcp" />
-      <item itemvalue="Python.test_asyn_serial" />
-      <item itemvalue="Python.test_schedule_tcp" />
       <item itemvalue="Python.get_serial_number" />
+      <item itemvalue="Python.test_asyn_tcp" />
+      <item itemvalue="Python.test_schedule_tcp" />
+      <item itemvalue="Python.test_syn_tcp" />
+      <item itemvalue="Python.demo_tcp" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test_asyn_tcp" />
+        <item itemvalue="Python.demo_tcp" />
+        <item itemvalue="Python.test_schedule_tcp" />
         <item itemvalue="Python.test_syn_tcp" />
         <item itemvalue="Python.get_serial_number" />
-        <item itemvalue="Python.test_asyn_tcp" />
-        <item itemvalue="Python.test_asyn_serial" />
-        <item itemvalue="Python.test_schedule_tcp" />
       </list>
     </recent_temporary>
   </component>
@@ -289,7 +284,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603954889344</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="update database management">
+      <created>1604047508232</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1604047508232</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -345,7 +347,8 @@
     <MESSAGE value="add the test program for air condition scheduler" />
     <MESSAGE value="update protical format" />
     <MESSAGE value="change framer from tcp to rtu (test_syn_tcp.py get_serial_number.py)" />
-    <option name="LAST_COMMIT_MESSAGE" value="change framer from tcp to rtu (test_syn_tcp.py get_serial_number.py)" />
+    <MESSAGE value="update database management" />
+    <option name="LAST_COMMIT_MESSAGE" value="update database management" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598779639948">
@@ -413,11 +416,11 @@
     </state>
     <state x="170" y="56" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1600317782721" />
     <state x="281" y="88" width="998" height="709" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601029620260" />
-    <state x="451" y="184" key="Vcs.Push.Dialog.v2" timestamp="1603954891520">
+    <state x="451" y="184" key="Vcs.Push.Dialog.v2" timestamp="1604047550027">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1600581238867" />
-    <state x="451" y="184" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603954891520" />
+    <state x="451" y="184" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1604047550027" />
     <state width="969" height="529" key="XDebugger.FullValuePopup" timestamp="1603950862413">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

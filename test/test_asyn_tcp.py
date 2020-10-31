@@ -7,10 +7,11 @@ import logging
 # Import the required asynchronous client
 # ----------------------------------------------------------------------- #
 from pymodbus.client.asynchronous.tcp import AsyncModbusTCPClient as ModbusClient
-# from pymodbus.client.asynchronous.udp import (
-#     AsyncModbusUDPClient as ModbusClient)
+# from pymodbus.client.asynchronous.udp import AsyncModbusUDPClient as ModbusClient
 from pymodbus.client.asynchronous import schedulers
-from pymodbus.constants import Defaults as Set
+# from pymodbus.constants import Defaults as Set
+from pymodbus.transaction import ModbusRtuFramer as ModbusFramer
+# from pymodbus.transaction import ModbusSocketFramer as ModbusFramer
 
 
 from threading import Thread
@@ -82,22 +83,28 @@ async def start_async_test(client):
     # rr = await client.read_input_registers(1, 8, unit=UNIT)
     # assert(rq.function_code < 0x80)     # test that we are not an error
 
-    arguments = {
-        'read_address':    1,
-        'read_count':      8,
-        'write_address':   1,
-        'write_registers': [20]*8,
-    }
+    # arguments = {
+    #     'read_address':    1,
+    #     'read_count':      8,
+    #     'write_address':   1,
+    #     'write_registers': [20]*8,
+    # }
     log.debug("Read write registeres simulataneously")
     # rq = await client.readwrite_registers(unit=UNIT, **arguments)
     # rr = await client.read_holding_registers(1, 8, unit=UNIT)
-    adress_register = 0  # 起始寄存器
-    length_data = 0x73  # 数据长度 HEX=
+    adress_register = 0x40  # 起始寄存器
+    length_data = 0x08  # 数据长度 HEX=
     adress_gateway = 0x1  # 云盒地址
-    rr = await client.read_holding_registers(adress_register, length_data, unit=adress_gateway)#, transaction=0x15
-    print('rr: %s' % repr(rr.registers))
-    print(len(rr.registers))
-    assert rr
+
+    serialNumber = []
+    for i in range(14):
+        rr = await client.read_holding_registers(adress_register*i, length_data, unit=adress_gateway)#, transaction=0x15
+        serialNumber.append(['{:04X}'.format(rx) for rx in rr.registers])
+    print(serialNumber)
+    # rr = await client.read_holding_registers(adress_register, length_data, unit=adress_gateway)  # , transaction=0x15
+    # print('rr: %s' % repr(rr.registers))
+    # print(len(rr.registers))
+    # assert rr
     # assert(rq.function_code < 0x80)     # test that we are not an error
     # assert(rq.registers == [20]*8)      # test the expected value
     # assert(rr.registers == [20]*8)      # test the expected value
@@ -115,7 +122,7 @@ def run_with_not_running_loop():
     loop = asyncio.new_event_loop()
     assert not loop.is_running()
     asyncio.set_event_loop(loop)
-    new_loop, client = ModbusClient(schedulers.ASYNC_IO, host='192.168.1.82', port=1030, loop=loop)
+    new_loop, client = ModbusClient(schedulers.ASYNC_IO, host='192.168.1.82', port=1038, loop=loop)#, framer=ModbusFramer
     loop.run_until_complete(start_async_test(client.protocol))
     loop.close()
     log.debug("--------------RUN_WITH_NOT_RUNNING_LOOP---------------")

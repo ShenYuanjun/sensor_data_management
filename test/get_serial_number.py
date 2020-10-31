@@ -3,7 +3,7 @@
 '''
 import logging
 from pymodbus.client.sync import ModbusTcpClient as ModbusClient
-from pymodbus.transaction import ModbusRtuFramer as ModbusFramer
+# from pymodbus.transaction import ModbusRtuFramer as ModbusFramer
 # from pymodbus.constants import Defaults as Set
 # from time import sleep
 
@@ -17,7 +17,7 @@ log.setLevel(logging.DEBUG)
 UNIT = 0x1
 
 try:
-    client = ModbusClient('192.168.1.82', port=1031, framer=ModbusFramer)
+    client = ModbusClient('192.168.1.82', port=1031)
     client.connect()
 
 

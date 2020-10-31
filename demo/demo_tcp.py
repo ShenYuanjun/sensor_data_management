@@ -12,6 +12,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 import motor.motor_asyncio
 from pymodbus.client.asynchronous.tcp import AsyncModbusTCPClient as ModbusClient
 from pymodbus.client.asynchronous import schedulers
+from pymodbus.transaction import ModbusRtuFramer as ModbusFramer
 
 UNIT = 0x00
 
@@ -49,7 +50,7 @@ if __name__ == '__main__':
     loop = asyncio.new_event_loop()
     # assert not loop.is_running()
     asyncio.set_event_loop(loop)
-    new_loop, client = ModbusClient(schedulers.ASYNC_IO, host='192.168.1.82', port=1032, loop=loop)
+    new_loop, client = ModbusClient(schedulers.ASYNC_IO, host='192.168.1.82', port=1032, loop=loop, framer=ModbusFramer)
     DBclient = motor.motor_asyncio.AsyncIOMotorClient('mongodb://192.168.1.10/',
                                                       username='zgl',
                                                       password='123456',

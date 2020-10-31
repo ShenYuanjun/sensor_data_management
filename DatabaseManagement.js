@@ -10,7 +10,7 @@ db.createUser(
     {
       user: "sensorManager",
       pwd: "manage123456",
-      roles: [ { role: "readWrite", db: "sensor" }]
+      roles: [ { role: "readWrite", db: "sensor_management" }]
     }
   )
 
@@ -18,7 +18,7 @@ db.createUser(
     {
       user: "sensorTester",
       pwd: "test123456",
-      roles: [ { role: "read", db: "sensor" }]
+      roles: [ { role: "read", db: "sensor_management" }]
     }
   )
 
