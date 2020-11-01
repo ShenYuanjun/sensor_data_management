@@ -51,6 +51,10 @@ Environment: {
 }
 
 AirConditioner: {
+    device: {
+        type: Schema.Types.ObjectId,
+        ref: 'air_condition_devices'
+    },
     tank: {
         c_level: Number,
         cool_temperatue1: Number,
@@ -67,16 +71,16 @@ AirConditioner: {
         heat_temperatue5: Number,
         heat_temperatue6: Number,
     },
-    device: {
+    main: {
         pump_inlet_tem: Number,
         circulating_pump_inlet_pip_pre: Number,
-        circulating_pump_return_pip_temperatue: Number,
+        circulating_pump_return_pip_temperature: Number,
         circulating_pump_return_pip_pressure: Number,
         water_supply_inlet_tem: Number,
         terminal_water_supply_inlet_pip_pressure: Number,
-        terminal_water_supply_return_pip_temperatue: Number,
+        terminal_water_supply_return_pip_temperature: Number,
         terminal_water_supply_return_pip_pressure: Number,
-        domestic_hot_water_inlet_pip_temperatue: Number,
+        domestic_hot_water_inlet_pip_temperature: Number,
         domestic_hot_water_inlet_pip_pressure: Number
     },
     terminal_room1: {
