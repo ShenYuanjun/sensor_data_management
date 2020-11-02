@@ -17,7 +17,7 @@ log.setLevel(logging.DEBUG)
 UNIT = 0x1
 
 try:
-    client = ModbusClient('192.168.1.82', port=1031)
+    client = ModbusClient('192.168.1.82', port=1036)
     client.connect()
 
 

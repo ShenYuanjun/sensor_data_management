@@ -20,14 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9eb18216-be5e-4e9f-a532-22c54466fa7e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_10_31_2020_6_31_PM_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_10_31_2020_6_31_PM__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/air_condition/adressing.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/air_condition/air_write.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/environment/addressing.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/environment/env_write.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/air_condition/air_test_syn.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/environment/env_test_syn.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DatabaseManagement.js" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseManagement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DatabaseManagement.json" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseManagement.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/air_condition/adressing.py" beforeDir="false" afterPath="$PROJECT_DIR$/air_condition/adressing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/addressing.py" beforeDir="false" afterPath="$PROJECT_DIR$/environment/addressing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/env_write.py" beforeDir="false" afterPath="$PROJECT_DIR$/environment/env_write.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/get_serial_number.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/get_serial_number.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_syn_tcp.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_syn_tcp.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +75,7 @@
       <recent name="E:\CPS\projects\sensor_data_management" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.env_write">
+  <component name="RunManager" selected="Python.get_serial_number">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="sensor_data_management" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -101,6 +102,9 @@
       <module name="sensor_data_management" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/environment" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -116,20 +120,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="demo_tcp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="env_test_syn" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="sensor_data_management" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/demo" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/environment" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/demo/demo_tcp.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/environment/env_test_syn.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -157,20 +158,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test_asyn_serial" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="get_serial_number" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="sensor_data_management" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/test_asyn_serial.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/get_serial_number.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -183,9 +181,6 @@
       <module name="sensor_data_management" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -202,19 +197,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.demo_tcp" />
-      <item itemvalue="Python.test_asyn_serial" />
       <item itemvalue="Python.test_syn_tcp" />
       <item itemvalue="Python.addressing" />
       <item itemvalue="Python.env_write" />
+      <item itemvalue="Python.get_serial_number" />
+      <item itemvalue="Python.env_test_syn" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.get_serial_number" />
         <item itemvalue="Python.env_write" />
-        <item itemvalue="Python.addressing" />
         <item itemvalue="Python.test_syn_tcp" />
-        <item itemvalue="Python.demo_tcp" />
-        <item itemvalue="Python.test_asyn_serial" />
+        <item itemvalue="Python.env_test_syn" />
+        <item itemvalue="Python.addressing" />
       </list>
     </recent_temporary>
   </component>
