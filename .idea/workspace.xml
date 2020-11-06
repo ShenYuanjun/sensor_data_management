@@ -19,12 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9eb18216-be5e-4e9f-a532-22c54466fa7e" name="Default Changelist" comment="env: v0.0; air_condition: add addressing">
+    <list default="true" id="9eb18216-be5e-4e9f-a532-22c54466fa7e" name="Default Changelist" comment="add env debug">
       <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/env_write.py" beforeDir="false" afterPath="$PROJECT_DIR$/environment/env_write.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_syn_tcp.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_syn_tcp.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,8 +60,9 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../untitled" />
-    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -120,6 +118,9 @@
       <module name="sensor_data_management" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/environment" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -139,6 +140,9 @@
       <module name="sensor_data_management" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/environment" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -158,6 +162,9 @@
       <module name="sensor_data_management" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -177,6 +184,9 @@
       <module name="sensor_data_management" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -275,7 +285,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604306727555</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="add env debug">
+      <created>1604646416135</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1604646416135</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -329,7 +346,8 @@
     <MESSAGE value="update the format of data from modbus" />
     <MESSAGE value="add test files and pymodbus doc" />
     <MESSAGE value="env: v0.0; air_condition: add addressing" />
-    <option name="LAST_COMMIT_MESSAGE" value="env: v0.0; air_condition: add addressing" />
+    <MESSAGE value="add env debug" />
+    <option name="LAST_COMMIT_MESSAGE" value="add env debug" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598779639948">
@@ -377,16 +395,16 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="271" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1598787710805" />
-    <state x="281" y="88" width="998" height="709" key="SettingsEditor" timestamp="1604643717295">
+    <state x="281" y="88" width="998" height="709" key="SettingsEditor" timestamp="1604646770647">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="170" y="56" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1600317782721" />
-    <state x="281" y="88" width="998" height="709" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1604643717295" />
-    <state x="451" y="184" key="Vcs.Push.Dialog.v2" timestamp="1604306729782">
+    <state x="281" y="88" width="998" height="709" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1604646770647" />
+    <state x="379" y="171" key="Vcs.Push.Dialog.v2" timestamp="1604646543351">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1600581238867" />
-    <state x="451" y="184" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1604306729782" />
+    <state x="379" y="171" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1604646543351" />
     <state width="969" height="529" key="XDebugger.FullValuePopup" timestamp="1601276829371">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
