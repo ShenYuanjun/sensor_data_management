@@ -1,2 +1,4 @@
 # Default ignored files
-/workspace.xml
+workspace.xml
+shelf/
+/environment/env_log.log

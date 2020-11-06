@@ -9,3 +9,5 @@ test5.py
  
   pymodbus文档
  https://pymodbus.readthedocs.io/en/stable/#
+ 
+ *$py.class;*.hprof;*.pyc;*.pyo;*.rbc;*.yarb;*~;.DS_Store;.git;.hg;.svn;CVS;__pycache__;_svn;vssver.scc;vssver2.scc;

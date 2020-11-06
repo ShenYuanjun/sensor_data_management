@@ -16,9 +16,9 @@ from pymodbus.client.asynchronous import schedulers
 import addressing as ads
 
 
-# import logging
-# logging.basicConfig()
-# log = logging.getLogger()
+import logging
+logging.basicConfig(filename='env_log.log', level=logging.WARNING)
+log = logging.getLogger()
 # log.setLevel(logging.DEBUG)
 
 async def env_modbus2mongodb(collection, client, bus):
@@ -88,8 +88,8 @@ if __name__ == '__main__':
                                                       authMechanism='SCRAM-SHA-256',
                                                       io_loop=loop)
     db = DBclient['sensor_management']
-    collection = db['environment']
-    # collection = db['data_test']
+    # collection = db['environment']
+    collection = db['data_test']
     scheduler = AsyncIOScheduler()
 
     scheduler.add_job(env_modbus2mongodb, 'interval', args=[collection, client1.protocol, 1], seconds=300)
