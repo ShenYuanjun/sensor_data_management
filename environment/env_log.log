@@ -1,0 +1,11 @@
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "env_modbus2mongodb" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "env_modbus2mongodb" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:root:Start Time: 2020-11-10 09:23:28.713609
+INFO:apscheduler.executors.default:Running job "env_modbus2mongodb (trigger: interval[0:05:00], next run at: 2020-11-10 09:33:28 CST)" (scheduled at 2020-11-10 09:28:28.711608+08:00)
+INFO:apscheduler.executors.default:Job "env_modbus2mongodb (trigger: interval[0:05:00], next run at: 2020-11-10 09:33:28 CST)" executed successfully
+INFO:apscheduler.executors.default:Running job "env_modbus2mongodb (trigger: interval[0:05:00], next run at: 2020-11-10 09:38:28 CST)" (scheduled at 2020-11-10 09:33:28.711608+08:00)
+INFO:apscheduler.executors.default:Job "env_modbus2mongodb (trigger: interval[0:05:00], next run at: 2020-11-10 09:38:28 CST)" executed successfully
