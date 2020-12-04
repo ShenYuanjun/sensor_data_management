@@ -41,6 +41,7 @@ equipment_index = [
     'conference_back',  # 6
     'roomVIP',  # 7
     'roomControl',  # 8
+    'meter' #9
 ]
 
 buses = []
@@ -48,18 +49,18 @@ buses = []
 buses.append([
     [0, 'cool_level', 0x81],  # 冷水箱液位
     [0, 'heat_level', 0x81],  # 热水箱液位
-    [0, 'heat_temperature', 0x01],  # 热水箱0.30m处温度
-    [0, 'heat_temperature', 0x01],  # 热水箱0.15m处温度
-    [0, 'heat_temperature', 0x01],  # 热水箱0.45m处温度
-    [0, 'heat_temperature', 0x01],  # 热水箱0.75m处温度
-    [0, 'cool_temperature', 0x01],  # 冷水箱0.45m处温度
-    [0, 'cool_temperature', 0x01],  # 冷水箱0.60m处温度
-    [0, 'cool_temperature', 0x01],  # 冷水箱0.30m处温度
-    [0, 'heat_temperature', 0x01],  # 热水箱0.60m处温度
-    [0, 'heat_temperature', 0x01],  # 热水箱0.90m处温度
-    [0, 'cool_temperature', 0x01],  # 冷水箱0.75m处温度
-    [0, 'cool_temperature', 0x01],  # 冷水箱0.15m处温度
-    [0, 'cool_temperature', 0x01],  # 冷水箱0.90m处温度
+    [0, 'heat_temperature2', 0x01],  # 热水箱0.30m处温度
+    [0, 'heat_temperature1', 0x01],  # 热水箱0.15m处温度
+    [0, 'heat_temperature3', 0x01],  # 热水箱0.45m处温度
+    [0, 'heat_temperature5', 0x01],  # 热水箱0.75m处温度
+    [0, 'cool_temperature3', 0x01],  # 冷水箱0.45m处温度
+    [0, 'cool_temperature4', 0x01],  # 冷水箱0.60m处温度
+    [0, 'cool_temperature2', 0x01],  # 冷水箱0.30m处温度
+    [0, 'heat_temperature4', 0x01],  # 热水箱0.60m处温度
+    [0, 'heat_temperature6', 0x01],  # 热水箱0.90m处温度
+    [0, 'cool_temperature5', 0x01],  # 冷水箱0.75m处温度
+    [0, 'cool_temperature1', 0x01],  # 冷水箱0.15m处温度
+    [0, 'cool_temperature6', 0x01],  # 冷水箱0.90m处温度
 ])  # 0
 
 buses.append([
@@ -130,6 +131,10 @@ buses.append([
     [6, 'air_outlet_humidity', 0x02],  # 会议室后面空调出风湿度
     [6, 'air_outlet_flow_rate', 0x30],  # 会议室后面空调出风风速
 ])  # 8
+
+buses.append([
+    [9, 'current_combine_total_active_energy', 0x0],  # 会议室前面空调出风温度9
+])  # 9
 
 # tank_ref = [['cool_temperature', 1, 1],
 #             ['cool_temperatue1', 1, 13],

@@ -9,6 +9,8 @@ http://39.108.220.80/download/user/ZQWL/EthRS/tools/
  
 pymodbus文档
 https://pymodbus.readthedocs.io/en/stable/#
+
+https://pymodbus.readthedocs.io/en/stable/source/example/synchronous_client.html
  
 motor文档
 https://motor.readthedocs.io/en/stable/index.html

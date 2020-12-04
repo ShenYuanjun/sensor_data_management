@@ -46,7 +46,7 @@ def air_modbus2mongodb_next():
         collection = db['data_test_air_']
         logger = db['air_condition_logger']
 
-        equipments = [{} for i in range(9)]
+        equipments = [{} for i in range(len(ads.equipment_index))]
         for i in range(9):  # 9根总线读数据
             client = ModbusClient(ads.conn[i][0], port=ads.conn[i][1], timeout=3)
             bus = ads.buses[i]

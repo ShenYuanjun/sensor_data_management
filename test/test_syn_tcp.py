@@ -4,6 +4,7 @@ tcp同步
 import logging
 from pymodbus.client.sync import ModbusTcpClient as ModbusClient
 from pymodbus.transaction import ModbusRtuFramer as ModbusFramer
+# from pymodbus.transaction import ModbusSocketFramer as ModbusFramer
 from pymodbus.constants import Defaults as Set
 from time import sleep
 
@@ -19,7 +20,7 @@ UNIT = 0x1
 # Set.ProtocolId = 0
 
 try:
-    client = ModbusClient('192.168.1.83', port=1036, timeout=5, framer=ModbusFramer)#
+    client = ModbusClient('192.168.1.82', port=1035, timeout=3, framer=ModbusFramer)#
     # from pymodbus.transaction import ModbusRtuFramer
     # client = ModbusClient('localhost', port=5020, framer=ModbusRtuFramer)
     # client = ModbusClient(method='binary', port='/dev/ptyp0', timeout=1)
@@ -80,13 +81,14 @@ try:
     # log.debug("Read write registeres simulataneously")
     # rq = client.readwrite_registers(unit=UNIT, **arguments)
 
-    log.debug("Read write registers simulataneously")
-    adress_register = 0x64  # 起始寄存器
-    length_data = 0x05  # 数据长度
+    # log.debug("Read write registers simulataneously")
+    adress_register = 0x00  # 起始寄存器
+    length_data = 0x10  # 数据长度
     adress_gateway = 0x01  # 通讯地址
     rr = client.read_holding_registers(adress_register, length_data, unit=adress_gateway)
     # rr = client.read_coils(adress_register, length_data, unit=adress_gateway)
     print(['{:04X}'.format(rx) for rx in rr.registers])
+    print(rr.registers)
 
     # data_all = []
     # for gate in range(8):
