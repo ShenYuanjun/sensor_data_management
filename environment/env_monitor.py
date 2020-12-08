@@ -20,7 +20,7 @@ from datetime import datetime
 
 import logging
 
-logging.basicConfig(filename='env_log1201.log', level=logging.INFO)  # WARNING DEBUG
+logging.basicConfig(filename='env_log1208.log', level=logging.INFO)  # WARNING DEBUG
 log = logging.getLogger()
 
 
@@ -44,10 +44,10 @@ def env_modbus2mongodb():
         #     return
 
         db = DBclient['sensor_management']
-        collection = db['data_test_1201']
+        collection = db['data_test_1208']
 
         for bus in range(1, 12):
-            client = ModbusClient(ads.conn[bus - 1][0], port=ads.conn[bus - 1][1], timeout=2, framer=ModbusFramer)
+            client = ModbusClient(ads.conn[bus - 1][0], port=ads.conn[bus - 1][1], timeout=3, framer=ModbusFramer)
 
             is_connected = client.connect()
             if not is_connected:  # modbus connect fail
@@ -72,8 +72,8 @@ def env_modbus2mongodb():
                 data_modbus = rr.registers
 
                 err_d = True
-                for i in range(112):
-                    if (data_modbus[i] != 0):
+                for k in range(112):
+                    if (data_modbus[k] != 0):
                         err_d = False
                         break
                     pass
@@ -83,13 +83,43 @@ def env_modbus2mongodb():
                                'data': data_modbus,
                                'err': 'All Null',
                                'datetime': datetime.now()}
+                    result = collection.insert_one(data_db)
                 else:
-                    data_db = {'name': '{:0>2d}{:0>2d}'.format(bus, box + 1),
-                               'data': data_modbus,
-                               'datetime': datetime.now()}
+                    # data_db = {'name': '{:0>2d}{:0>2d}'.format(bus, box + 1),
+                    #            'data': data_modbus,
+                    #            'datetime': datetime.now()}
 
-                result = collection.insert_one(data_db)
-
+                    for i in range(ads.box_num[box][0]):  # 二合一编号（0开始）
+                        pos_two = ads.two_start + ads.two_len * i
+                        # print('two', data_modbus[pos_two + ads.pos_name], (box+1) * 256 + i+1)
+                        if data_modbus[pos_two + ads.pos_name] == (box + 1) * 256 + ads.two_start + i + 1:
+                            data_db = {'name': '{:0>2d}{:0>2d}{:0>2d}'.format(bus, box + 1, ads.two_start + i + 1),
+                                       'two_in_one': {
+                                           ads.two_type[j]: data_modbus[pos_two + ads.pos_data + j] * ads.two_carry[j]
+                                           for j in range(2)},
+                                       'datetime': datetime.now()}
+                        else:
+                            data_db = {'name': '{:0>2d}{:0>2d}{:0>2d}'.format(bus, box + 1, ads.two_start + i + 1),
+                                       'data': data_modbus,
+                                       'err': 'Unexpected Data Received',
+                                       'datetime': datetime.now()}
+                        result = collection.insert_one(data_db)
+                    for i in range(ads.box_num[box][1]):  # 六合一编号
+                        pos_six = ads.six_start * ads.two_len + ads.six_len * i
+                        # print('six', data_modbus[pos_six + ads.pos_name], (box+1) * 256 + ads.six_start+i + ads.six_bios+1)
+                        if data_modbus[pos_six + ads.pos_name] == (
+                                box + 1) * 256 + ads.six_start + i + ads.six_bios + 1:
+                            data_db = {'name': '{:0>2d}{:0>2d}{:0>2d}'.format(bus, box + 1, ads.six_start + i + 1),
+                                       'six_in_one': {
+                                           ads.six_type[j]: data_modbus[pos_six + ads.pos_data + j] * ads.six_carry[j]
+                                           for j in range(6)},
+                                       'datetime': datetime.now()}
+                        else:
+                            data_db = {'name': '{:0>2d}{:0>2d}{:0>2d}'.format(bus, box + 1, ads.six_start + i + 1),
+                                       'data': data_modbus,
+                                       'err': 'Unexpected Data Received',
+                                       'datetime': datetime.now()}
+                        result = collection.insert_one(data_db)
 
             client.close()
     except ConnectionFailure as e:

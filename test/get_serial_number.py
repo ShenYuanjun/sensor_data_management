@@ -18,7 +18,7 @@ UNIT = 0x1
 ac_N = [14, 2, 4, 14, 5]
 
 try:
-    client = ModbusClient('192.168.1.82', port=1034, framer=ModbusFramer)
+    client = ModbusClient('192.168.1.82', port=1033, framer=ModbusFramer)
     client.connect()
 
 
@@ -30,7 +30,7 @@ try:
     adress_gateway = 0x01  # 云盒地址
 
     serialNumber = []
-    for i in range(5):
+    for i in range(14):
         sleep(1)
         rr = client.read_holding_registers(adress_register+adress_increment*i, length_data, unit=adress_gateway)
         serialNumber.append(['{:04X}'.format(rx) for rx in rr.registers])

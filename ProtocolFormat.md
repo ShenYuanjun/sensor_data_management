@@ -216,6 +216,27 @@ XXX| 05 | 0x00 0x00 | 0x01 | 调度间空调出风湿度 |
 | 0x0315 | 1 | 总功率因素 | 0.001 | power_factor_total |
 | 0x0316 | 1 | 频率 | 0.01Hz | frequency |
 
+### 主机
+|| 寄存器地址| 含义 | 单位 | 变量 |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 0 | 模式设定 | - | mode_setting |
+| 1 | 制热温度设定 | 摄氏度 | heating_temperature_setting |
+| 2 | 制冷温度设定 | 摄氏度 | cooling_temperature_setting |
+| 3 | 制热水温度设定 | 摄氏度 | hot_water_temperature_setting |
+| 101 | 总出水温度 | 摄氏度 | total_output_water_temperature |
+| 102 | 机组在线状态（1-在线 0-不在线）| - | equipment_online_status |
+| 3005 | 运行模式（0-关机 1-水泵 2-制冷 3-制热 4-制热水 5-采暖 6-电加热） | - | operating_mode |
+| 3006 | 运行能需 |  | operating_energy_requirements |
+| 3007 | 总出水温度Tw | 摄氏度 | total_output_water_temperature_Tw |
+| 3008 | 单元出水温度 | 摄氏度 | unit_output_water_temperature |
+| 3009 | 单元进水温度 | 摄氏度 | unit_input_water_temperature |
+| 3010 | 冷凝口出水温度T3A | 摄氏度 | condensate_outlet_water_temperature_T3A |
+| 3011 | 冷凝口出水温度T3B | 摄氏度 | condensate_outlet_water_temperature_T3B |
+| 3012 | 室外环境温度 | 摄氏度 | outdoor_ambient_temperature |
+| 3014 | 板换进口温度T6A | 摄氏度 | plate_change_inlet_temperature_T6A |
+| 3015 | 板换进口温度T6B | 摄氏度 | plate_change_inlet_temperature_T6B |
+| 3016 | 系统回气温度 | 摄氏度 | system_return_air_temperature |
+| 3017 | T2冷媒液侧温度 | 摄氏度 | T2_refrigerant_liquid_side_temperature |
 
 
 # template

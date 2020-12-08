@@ -20,10 +20,11 @@ from datetime import datetime
 
 import logging
 
-logging.basicConfig(filename='ac_log1201.log', level=logging.INFO)  # WARNING DEBUG
+logging.basicConfig(filename='ac_log1208.log', level=logging.INFO)  # WARNING DEBUG
 log = logging.getLogger()
 
 ac_N = [14, 2, 4, 14, 5]
+ac_L = [3, 6, 3, 6]
 
 
 def env_modbus2mongodb():
@@ -46,7 +47,7 @@ def env_modbus2mongodb():
         #     return
 
         db = DBclient['sensor_management']
-        collection = db['air_condition_test_1202']
+        collection = db['air_condition_test_1208']
 
         for i in range(5):
             client = ModbusClient(ads.conn[i][0], port=ads.conn[i][1], timeout=3, framer=ModbusFramer)
@@ -72,7 +73,7 @@ def env_modbus2mongodb():
                 data_modbus = rr.registers
                 err_d = True
                 for k in range(4):
-                    if (data_modbus[i] != 0):
+                    if (data_modbus[k] != 0):
                         err_d = False
                         break
                     pass
@@ -88,6 +89,44 @@ def env_modbus2mongodb():
                 result = collection.insert_one(data_db)
             client.close()
 
+        for i in range(5, 9):
+            client = ModbusClient(ads.conn[i][0], port=ads.conn[i][1], timeout=3, framer=ModbusFramer)
+            is_connected = client.connect()
+            if not is_connected:  # modbus连接失败
+                data_db = {'name': '{:0>2d}xx'.format(i + 1),
+                           'err': 'Modbus Connect Failed',
+                           'datetime': datetime.now()}
+                result = collection.insert_one(data_db)
+                client.close()
+                sleep(1)
+                continue
+            sleep(1)
+            rr = client.read_holding_registers(0x00, ac_L[i-5] * 2, unit=0x01)
+            if not hasattr(rr, 'registers'):  # 无返回数据
+                data_db = {'name': '{:0>2d}xx:'.format(i + 1),
+                           'message': rr.message,
+                           'err': 'No Data Return',
+                           'datetime': datetime.now()}
+                result = collection.insert_one(data_db)
+                continue
+            data_modbus = rr.registers
+            err_d = True
+            for k in range(ac_L[i-5] * 2):
+                if (data_modbus[k] != 0):
+                    err_d = False
+                    break
+                pass
+            if err_d:
+                data_db = {'name': '{:0>2d}'.format(i + 1),
+                           'data': data_modbus,
+                           'err': 'All Null',
+                           'datetime': datetime.now()}
+            else:
+                data_db = {'name': '{:0>2d}'.format(i + 1),
+                           'data': data_modbus,
+                           'datetime': datetime.now()}
+            result = collection.insert_one(data_db)
+            client.close()
 
     except ConnectionFailure as e:
         log.error(e)

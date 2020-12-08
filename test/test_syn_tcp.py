@@ -83,12 +83,13 @@ try:
 
     # log.debug("Read write registers simulataneously")
     adress_register = 0x00  # 起始寄存器
-    length_data = 0x10  # 数据长度
+    length_data = 0x06 # 数据长度
     adress_gateway = 0x01  # 通讯地址
     rr = client.read_holding_registers(adress_register, length_data, unit=adress_gateway)
     # rr = client.read_coils(adress_register, length_data, unit=adress_gateway)
     print(['{:04X}'.format(rx) for rx in rr.registers])
     print(rr.registers)
+    # print([int(rx) for rx in rr.bits])
 
     # data_all = []
     # for gate in range(8):
