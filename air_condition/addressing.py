@@ -40,9 +40,8 @@ rgs_start = 0x00
 # 起始寄存器地址间隔
 rgs_len = 0x40
 # 数据长度
-len_data = 0x08 #0x10
+len_data = 0x10 #0x08
 
-#6789号总线
 
 
 # 电流值和物理值转换
@@ -69,7 +68,7 @@ equipment_index = [
 ]
 
 buses = []
-
+#[所属设备号, 变量名, 变量类型]
 buses.append([
     [0, 'cool_level', 0x81],  # 冷水箱液位
     [0, 'heat_level', 0x81],  # 热水箱液位
@@ -124,41 +123,42 @@ buses.append([
     [8, 'air_outlet_temperature', 0x01, 'air_outlet_humidity', 0x02],  # 调度室顶上空调出风口温湿度
 ])  # 4
 
+#[所属设备号, 变量名, 变量类型(i2v)]
 buses.append([
-    [1, 'air_outlet_temperature', 0x01],  # 1号房间空调出风温度
-    [1, 'air_outlet_humidity', 0x02],  # 1号房间空调出风湿度
-    [1, 'air_outlet_flow_rate', 0x30],  # 1号房间空调出风风速
+    [1, 'air_outlet_temperature', 1],  # 1号房间空调出风温度
+    [1, 'air_outlet_humidity', 2],  # 1号房间空调出风湿度
+    [1, 'air_outlet_flow_rate', 3],  # 1号房间空调出风风速
 ])  # 5
 
 buses.append([
-    [2, 'air_outlet_temperature', 0x01],  # 3号房间空调出风温度
-    [2, 'air_outlet_humidity', 0x02],  # 3号房间空调出风湿度
-    [2, 'air_outlet_flow_rate', 0x30],  # 3号房间空调出风风速
-    [3, 'air_outlet_temperature', 0x01],  # 4号房间空调出风温度
-    [3, 'air_outlet_humidity', 0x02],  # 4号房间空调出风湿度
-    [3, 'air_outlet_flow_rate', 0x30],  # 4号房间空调出风风速
+    [2, 'air_outlet_temperature', 1],  # 3号房间空调出风温度
+    [2, 'air_outlet_humidity', 2],  # 3号房间空调出风湿度
+    [2, 'air_outlet_flow_rate', 3],  # 3号房间空调出风风速
+    [3, 'air_outlet_temperature', 1],  # 4号房间空调出风温度
+    [3, 'air_outlet_humidity', 2],  # 4号房间空调出风湿度
+    [3, 'air_outlet_flow_rate', 3],  # 4号房间空调出风风速
 ])  # 6
 
 buses.append([
-    [7, 'air_outlet_temperature', 0x01],  # VIP间空调出风温度
-    [7, 'air_outlet_humidity', 0x02],  # VIP间空调出风湿度
-    [7, 'air_outlet_flow_rate', 0x30],  # VIP间空调出风风速
-    [8, 'air_outlet_temperature', 0x01],  # 调度间空调出风温度
-    [8, 'air_outlet_humidity', 0x01],  # 调度间空调出风湿度
+    [7, 'air_outlet_temperature', 1],  # VIP间空调出风温度
+    [7, 'air_outlet_humidity', 2],  # VIP间空调出风湿度
+    [7, 'air_outlet_flow_rate', 3],  # VIP间空调出风风速
+    [8, 'air_outlet_temperature', 1],  # 调度间空调出风温度
+    [8, 'air_outlet_humidity', 2],  # 调度间空调出风湿度
 ])  # 7
 
 buses.append([
-    [5, 'air_outlet_temperature', 0x01],  # 会议室前面空调出风温度
-    [5, 'air_outlet_humidity', 0x02],  # 会议室前面空调出风湿度
-    [5, 'air_outlet_flow_rate', 0x30],  # 会议室前面空调出风风速
-    [6, 'air_outlet_temperature', 0x01],  # 会议室后面空调出风温度
-    [6, 'air_outlet_humidity', 0x02],  # 会议室后面空调出风湿度
-    [6, 'air_outlet_flow_rate', 0x30],  # 会议室后面空调出风风速
+    [5, 'air_outlet_temperature', 1],  # 会议室前面空调出风温度
+    [5, 'air_outlet_humidity', 2],  # 会议室前面空调出风湿度
+    [5, 'air_outlet_flow_rate', 3],  # 会议室前面空调出风风速
+    [6, 'air_outlet_temperature', 1],  # 会议室后面空调出风温度
+    [6, 'air_outlet_humidity', 2],  # 会议室后面空调出风湿度
+    [6, 'air_outlet_flow_rate', 3],  # 会议室后面空调出风风速
 ])  # 8
 
 buses.append([
     [9, 'current_combine_total_active_energy', 0x0],  #
-])  # 9
+])  # 9 meter
 
 # tank_ref = [['cool_temperature', 1, 1],
 #             ['cool_temperatue1', 1, 13],

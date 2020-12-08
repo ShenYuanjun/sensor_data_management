@@ -19,9 +19,8 @@ from datetime import datetime
 
 import logging
 
-logging.basicConfig(filename='air_log1111.log', level=logging.DEBUG)  # WARNING INFO
+logging.basicConfig(filename='air_log1208.log', level=logging.INFO)  # WARNING  DEBUG
 log = logging.getLogger()
-
 
 try:
     t = time()
@@ -41,14 +40,14 @@ try:
     #     # print("Server not available")
     #     return
 
-    db = DBclient['sensor_management']
+    db = DBclient['sensor_management_try']
     # collection = db['air_condition']
-    collection = db['data_test_air_']
+    collection = db['data_test_air_1208']
     logger = db['air_condition_logger']
 
     equipments = [{} for i in range(9)]
-    for i in range(9):  # 9根总线读数据
-        client = ModbusClient(ads.conn[i][0], port=ads.conn[i][1], timeout=1, framer=ModbusFramer)
+    for i in range(5):  # 12345总线读数据
+        client = ModbusClient(ads.conn[i][0], port=ads.conn[i][1], timeout=3, framer=ModbusFramer)
         bus = ads.buses[i]
 
         is_connected = client.connect()
@@ -60,8 +59,8 @@ try:
             client.close()
             sleep(1)
             continue
-
         for j in range(ads.bus_sensor_number[i]):
+            sleep(1)
             rr = client.read_holding_registers(ads.rgs_start + j * ads.rgs_len, ads.len_data, unit=ads.box_ads)
             if not hasattr(rr, 'registers'):  # 无返回数据
                 data_db = {'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[i] + '-' + bus[j][1],
@@ -70,7 +69,6 @@ try:
                            'datetime': datetime.now()}
                 result = logger.insert_one(data_db)
                 continue
-
             data_modbus = rr.registers
             type = data_modbus[0] // 256  # 数据类型
             if type != bus[j][2]:
@@ -88,22 +86,69 @@ try:
             elif sign_n == 0x00:
                 sign = False  # 无符号
             else:
-                data_db = {'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[i] + '-' + bus[j][1],
+                data_db = {'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[bus[j][0]] + '-' + bus[j][1],
                            'data': data_modbus,
                            'err': 'Wrong Sign Index: Should be 0x{:0X} or 0x{:0X}, but accepted 0x{:0X}'.format(
                                0x80, 0x00, sign_n),
                            'datetime': datetime.now()}
                 result = logger.insert_one(data_db)
                 continue
-
             data_origin = data_modbus[1]
             if sign and data_origin >= 32767:
                 data = -(65536 - data_origin) / (10 ** pos)
             else:
                 data = data_origin / (10 ** pos)
+            equipments[bus[j][0]][bus[j][1]] = data
+        client.close()
 
-            # equipments[bus[j][1]] = data
-            # equipments[ads.equipment_index[bus[j][0]]][bus[j][1]] = data
+    for i in range(5, 9):  # 6789总线读数据
+        client = ModbusClient(ads.conn[i][0], port=ads.conn[i][1], timeout=3, framer=ModbusFramer)
+        bus = ads.buses[i]
+
+        is_connected = client.connect()
+        if not is_connected:  # modbus连接失败
+            data_db = {'name': 'bus{:0>1d}'.format(i + 1),
+                       'err': 'Modbus Connect Failed',
+                       'datetime': datetime.now()}
+            result = logger.insert_one(data_db)
+            client.close()
+            sleep(1)
+            continue
+        pass
+        sleep(1)
+        rr = client.read_holding_registers(ads.rgs_start, ads.len_data, unit=ads.box_ads)
+        if not hasattr(rr, 'registers'):  # 无返回数据
+            data_db = {'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[i] + '-' + bus[j][1],
+                       'message': rr.message,
+                       'err': 'No Data Return',
+                       'datetime': datetime.now()}
+            result = logger.insert_one(data_db)
+            continue
+        data_modbus = rr.registers
+        for j in range(len(bus)):
+            type = data_modbus[2 * j] // 4096  # 数据类型 C0
+            if type != 12:
+                data_db = {'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[bus[j][0]] + '-' + bus[j][1],
+                           'data': data_modbus,
+                           'err': 'Wrong Type Index: Should be 0xC0, but accepted 0x{:0X}'.format(type),
+                           'datetime': datetime.now()}
+                result = logger.insert_one(data_db)
+                continue
+            pos = data_modbus[0] % 256  # 小数位数
+            data_origin = data_modbus[2 * j + 1] / (10 ** pos)
+            inf0 = ads.i2v[0][0]
+            sup0 = ads.i2v[0][1]
+            inf1 = ads.i2v[bus[j][2]][0]
+            sup1 = ads.i2v[bus[j][2]][1]
+            if inf0 <= data_origin <= sup0:
+                data = (data_origin - inf0) / (sup0 - inf0) * (sup1 - inf1) + inf1
+            else:
+                data_db = {'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[bus[j][0]] + '-' + bus[j][1],
+                           'data': data_modbus,
+                           'err': 'Wrong Value Range: Should be 4~20, but accepted {:0X}'.format(data_origin),
+                           'datetime': datetime.now()}
+                result = logger.insert_one(data_db)
+                continue
             equipments[bus[j][0]][bus[j][1]] = data
         client.close()
 
@@ -126,13 +171,3 @@ except Exception as e:
 finally:
     DBclient.close()
     log.info('Time Consuming: ' + str(time() - t))
-
-
-
-
-
-
-
-
-
-
