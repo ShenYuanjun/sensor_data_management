@@ -23,16 +23,6 @@ bus_sensor_number = [14, 2, 4, 14, 5, 3, 6, 3, 6]
 busN = [[0], [1, 5], [2, 6], [3, 4, 7, 8]]
 equipmentN = [[0], [1], [2, 3], [4, 5, 6, 7, 8]]
 
-# 云盒在线测试
-# 云盒地址
-box_ads_c = 0x01
-# 起始寄存器起始地址
-rgs_start_c = 0x00
-# 数据长度
-len_data_c = 0x08
-
-
-#12345号总线
 # 云盒地址
 box_ads = 0x01
 # 起始寄存器起始地址
@@ -40,9 +30,7 @@ rgs_start = 0x00
 # 起始寄存器地址间隔
 rgs_len = 0x40
 # 数据长度
-len_data = 0x10 #0x08
-
-
+len_data = 0x10  # 0x08
 
 # 电流值和物理值转换
 i2v = [
@@ -65,10 +53,11 @@ equipment_index = [
     'roomVIP',  # 7
     'roomControl',  # 8
     'meter'  # 9
+    'main'  # 10
 ]
 
 buses = []
-#[所属设备号, 变量名, 变量类型]
+# [所属设备号, 变量名, 变量类型]
 buses.append([
     [0, 'cool_level', 0x81],  # 冷水箱液位
     [0, 'heat_level', 0x81],  # 热水箱液位
@@ -123,7 +112,7 @@ buses.append([
     [8, 'air_outlet_temperature', 0x01, 'air_outlet_humidity', 0x02],  # 调度室顶上空调出风口温湿度
 ])  # 4
 
-#[所属设备号, 变量名, 变量类型(i2v)]
+# [所属设备号, 变量名, 变量类型(i2v)]
 buses.append([
     [1, 'air_outlet_temperature', 1],  # 1号房间空调出风温度
     [1, 'air_outlet_humidity', 2],  # 1号房间空调出风湿度
@@ -156,9 +145,15 @@ buses.append([
     [6, 'air_outlet_flow_rate', 3],  # 会议室后面空调出风风速
 ])  # 8
 
+# [变量名, 寄存器地址, 数据长度]
 buses.append([
-    [9, 'current_combine_total_active_energy', 0x0],  #
+    ['current_combine_total_active_energy', 0x0000, 2],  # 当前组合有功总电能
 ])  # 9 meter
+
+# [变量名, 寄存器地址]
+buses.append([
+    ['total_output_water_temperature', 101],  # 总出水温度
+])  # 10 main
 
 # tank_ref = [['cool_temperature', 1, 1],
 #             ['cool_temperatue1', 1, 13],

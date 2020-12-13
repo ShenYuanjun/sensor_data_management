@@ -59,46 +59,66 @@ try:
             client.close()
             sleep(1)
             continue
+
+        sleep(1)
+        rr = client.read_coils(ads.rgs_start, ads.len_data, unit=ads.box_ads)
+        if hasattr(rr, 'bits'):
+            checkout = rr.bits
+        else:
+            data_db = {'name': 'bus{:0>1d}:'.format(i + 1),
+                       'message': rr.message,
+                       'err': 'Checkout Failed',
+                       'datetime': datetime.now()}
+            result = logger.insert_one(data_db)
+            checkout = [True for i in range(16)]
+
         for j in range(ads.bus_sensor_number[i]):
-            sleep(1)
-            rr = client.read_holding_registers(ads.rgs_start + j * ads.rgs_len, ads.len_data, unit=ads.box_ads)
-            if not hasattr(rr, 'registers'):  # 无返回数据
-                data_db = {'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[i] + '-' + bus[j][1],
-                           'message': rr.message,
-                           'err': 'No Data Return',
-                           'datetime': datetime.now()}
-                result = logger.insert_one(data_db)
-                continue
-            data_modbus = rr.registers
-            type = data_modbus[0] // 256  # 数据类型
-            if type != bus[j][2]:
-                data_db = {'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[i] + '-' + bus[j][1],
-                           'data': data_modbus,
-                           'err': 'Wrong Type Index: Should be 0x{:0X}, but accepted 0x{:0X}'.format(bus[j][2],
-                                                                                                     type),
-                           'datetime': datetime.now()}
-                result = logger.insert_one(data_db)
-                continue
-            pos = data_modbus[0] % 16  # 小数位数
-            sign_n = data_modbus[0] % 256 - pos  ## 有无符号
-            if sign_n == 0x80:
-                sign = True  # 有符号
-            elif sign_n == 0x00:
-                sign = False  # 无符号
+            if checkout[j]:
+                sleep(1)
+                rr = client.read_holding_registers(ads.rgs_start + j * ads.rgs_len, ads.len_data, unit=ads.box_ads)
+                if not hasattr(rr, 'registers'):  # 无返回数据
+                    data_db = {'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[bus[j][0]] + '-' + bus[j][1],
+                               'message': rr.message,
+                               'err': 'No Data Return',
+                               'datetime': datetime.now()}
+                    result = logger.insert_one(data_db)
+                    continue
+                data_modbus = rr.registers
+                type = data_modbus[0] // 256  # 数据类型
+                if type != bus[j][2]:
+                    data_db = {'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[bus[j][0]] + '-' + bus[j][1],
+                               'data': data_modbus,
+                               'err': 'Wrong Type Index: Should be 0x{:0X}, but accepted 0x{:0X}'.format(bus[j][2],
+                                                                                                         type),
+                               'datetime': datetime.now()}
+                    result = logger.insert_one(data_db)
+                    continue
+                pos = data_modbus[0] % 16  # 小数位数
+                sign_n = data_modbus[0] % 256 - pos  ## 有无符号
+                if sign_n == 0x80:
+                    sign = True  # 有符号
+                elif sign_n == 0x00:
+                    sign = False  # 无符号
+                else:
+                    data_db = {'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[bus[j][0]] + '-' + bus[j][1],
+                               'data': data_modbus,
+                               'err': 'Wrong Sign Index: Should be 0x{:0X} or 0x{:0X}, but accepted 0x{:0X}'.format(
+                                   0x80, 0x00, sign_n),
+                               'datetime': datetime.now()}
+                    result = logger.insert_one(data_db)
+                    continue
+                data_origin = data_modbus[1]
+                if sign and data_origin >= 32767:
+                    data = -(65536 - data_origin) / (10 ** pos)
+                else:
+                    data = data_origin / (10 ** pos)
+                equipments[bus[j][0]][bus[j][1]] = data
             else:
                 data_db = {'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[bus[j][0]] + '-' + bus[j][1],
-                           'data': data_modbus,
-                           'err': 'Wrong Sign Index: Should be 0x{:0X} or 0x{:0X}, but accepted 0x{:0X}'.format(
-                               0x80, 0x00, sign_n),
+                           'data': checkout,
+                           'err': 'The Sensor Is Outline',
                            'datetime': datetime.now()}
                 result = logger.insert_one(data_db)
-                continue
-            data_origin = data_modbus[1]
-            if sign and data_origin >= 32767:
-                data = -(65536 - data_origin) / (10 ** pos)
-            else:
-                data = data_origin / (10 ** pos)
-            equipments[bus[j][0]][bus[j][1]] = data
         client.close()
 
     for i in range(5, 9):  # 6789总线读数据
@@ -114,11 +134,11 @@ try:
             client.close()
             sleep(1)
             continue
-        pass
+
         sleep(1)
         rr = client.read_holding_registers(ads.rgs_start, ads.len_data, unit=ads.box_ads)
         if not hasattr(rr, 'registers'):  # 无返回数据
-            data_db = {'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[i] + '-' + bus[j][1],
+            data_db = {'name': 'bus{:0>1d}:'.format(i + 1),
                        'message': rr.message,
                        'err': 'No Data Return',
                        'datetime': datetime.now()}

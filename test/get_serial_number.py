@@ -18,7 +18,7 @@ UNIT = 0x1
 ac_N = [14, 2, 4, 14, 5]
 
 try:
-    client = ModbusClient('192.168.1.82', port=1033, framer=ModbusFramer)
+    client = ModbusClient('192.168.1.82', port=1030, framer=ModbusFramer)
     client.connect()
 
 
