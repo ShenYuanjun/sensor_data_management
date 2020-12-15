@@ -20,7 +20,7 @@ from datetime import datetime
 
 import logging
 
-logging.basicConfig(filename='env_log1211.log', level=logging.INFO)  # WARNING DEBUG
+logging.basicConfig(filename='env_log1212.log', level=logging.INFO)  # WARNING DEBUG
 log = logging.getLogger()
 
 
@@ -44,7 +44,7 @@ def env_modbus2mongodb():
         #     return
 
         db = DBclient['sensor_management']
-        collection = db['data_test_1211']
+        collection = db['data_test_1212']
 
         for bus in range(1, 12):
             client = ModbusClient(ads.conn[bus - 1][0], port=ads.conn[bus - 1][1], timeout=3, framer=ModbusFramer)
