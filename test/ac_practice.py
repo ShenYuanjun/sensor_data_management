@@ -18,7 +18,7 @@ filename = 'totaldata.json'
 logging.basicConfig(filename='air_log1211.log', level=logging.INFO)  # WARNING DEBUG
 log = logging.getLogger()
 
-A = 24  # 循环次数
+A = 24*4  # 循环次数
 v = 15  # 循环间隔分钟数 需大于等于1
 
 bus1 = [0, 1, 2, 3, 4]  # 总线12345
