@@ -19,7 +19,7 @@ from datetime import datetime
 
 import logging
 
-logging.basicConfig(filename='air_log1208.log', level=logging.INFO)  # WARNING  DEBUG
+logging.basicConfig(level=logging.INFO)  # WARNING  DEBUGfilename='air_log1208.log',
 log = logging.getLogger()
 
 try:
@@ -40,10 +40,10 @@ try:
     #     # print("Server not available")
     #     return
 
-    db = DBclient['sensor_management_try']
+    db = DBclient['sensor_management']
     # collection = db['air_condition']
-    collection = db['data_test_air_1208']
-    logger = db['air_condition_logger']
+    collection = db['data_test_ac_1219']
+    logger = db['air_condition_logger_1219']
 
     equipments = [{} for i in range(9)]
     for i in range(5):  # 12345总线读数据
@@ -113,6 +113,7 @@ try:
                 else:
                     data = data_origin / (10 ** pos)
                 equipments[bus[j][0]][bus[j][1]] = data
+
             else:
                 data_db = {'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[bus[j][0]] + '-' + bus[j][1],
                            'data': checkout,
@@ -172,14 +173,19 @@ try:
             equipments[bus[j][0]][bus[j][1]] = data
         client.close()
 
+    # for eqt in range(9):  # 9个设备写入数据库
+    #     data_db = {'name': ads.equipment_index[eqt],
+    #                'data': equipments[eqt],
+    #                'datetime': datetime.now()}
+    #     result = collection.insert_one(data_db)
+    data_db = []
     for eqt in range(9):  # 9个设备写入数据库
-        data_db = {'name': ads.equipment_index[eqt],
-                   'data': equipments[eqt],
-                   'datetime': datetime.now()}
-        result = collection.insert_one(data_db)
+        data_db.append({'name': ads.equipment_index[eqt],
+                        'data': equipments[eqt],
+                        'datetime': datetime.now()})
+    result = collection.insert_many(data_db)
 
-    # DBclient.close()
-    # log.info('Time Consuming: ' + str(time() - t))
+
 except ConnectionFailure as e:  # Exception
     log.error(e)
 #     DBclient.close()
