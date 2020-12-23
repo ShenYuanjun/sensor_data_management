@@ -228,20 +228,51 @@ XXX| 05 | 0x00 0x00 | 0x01 | 调度间空调出风湿度 |
 | 02 | 1 | 制热温度设定 | 摄氏度 | heating_temperature_setting |
 | 03 | 2 | 制冷温度设定 | 摄氏度 | cooling_temperature_setting |
 | 04 | 3 | 制热水温度设定 | 摄氏度 | hot_water_temperature_setting |
-| 05 | 101 | 总出水温度 | 摄氏度 | total_outlet_water_temperature |
-| 06 | 102 | 机组在线状态（1-在线 0-不在线）| - | equipment_online_status |
-| 07 | 3005 | 运行模式（0-关机 1-水泵 2-制冷 3-制热 4-制热水 5-采暖 6-电加热） | - | operating_mode |
-| 08 | 3006 | 运行能需 |  | operating_energy_requirements |
-| 09 | 3007 | 总出水温度Tw | 摄氏度 | total_outlet_water_temperature_Tw |
-| 10 | 3008 | 单元出水温度 | 摄氏度 | unit_outlet_water_temperature |
-| 11 | 3009 | 单元进水温度 | 摄氏度 | unit_inlet_water_temperature |
-| 12 | 3010 | 冷凝口出水温度T3A | 摄氏度 | condensate_outlet_water_temperature_T3A |
-| 13 | 3011 | 冷凝口出水温度T3B | 摄氏度 | condensate_outlet_water_temperature_T3B |
-| 14 | 3012 | 室外环境温度 | 摄氏度 | outdoor_ambient_temperature |
-| 15 | 3014 | 板换进口温度T6A | 摄氏度 | plate_change_inlet_temperature_T6A |
-| 16 | 3015 | 板换进口温度T6B | 摄氏度 | plate_change_inlet_temperature_T6B |
-| 17 | 3016 | 系统回气温度 | 摄氏度 | system_return_air_temperature |
-| 18 | 3017 | T2冷媒液侧温度 | 摄氏度 | T2_refrigerant_liquid_side_temperature |
+| 05 | 4 | 水位设定 |      | water_level_setting |
+| 06 | 100 | 水箱温度 | 摄氏度 | water_tank_temperature |
+| 07 | 101 | 总出水温度 | 摄氏度 | total_outlet_water_temperature |
+| 08 | 102 | 机组在线状态（1-在线 0-不在线）| - | equipment_online_status |
+| 09 | 3000 | 主控从机地址 |   | master_slave_address |
+| 10 | 3001 | 主控从机机型 |   | master_slave_model   |
+| 11 | 3002 | 故障低位 |    | fault_low_bit |
+| 12 | 3003 | 故障高位 |    | fault_high_bit |
+| 13 | 3004 | 主控软件版本 |    | master_control_software_version |
+| 14 | 3005 | 运行模式（0-关机 1-水泵 2-制冷 3-制热 4-制热水 5-采暖 6-电加热） | - | operating_mode |
+| 15 | 3006 | 运行能需 |  | operating_energy_requirements |
+| 16 | 3007 | 总出水温度Tw | 摄氏度 | total_outlet_water_temperature_Tw |
+| 17 | 3008 | 单元出水温度 | 摄氏度 | unit_outlet_water_temperature |
+| 18 | 3009 | 单元进水温度 | 摄氏度 | unit_inlet_water_temperature |
+| 19 | 3010 | 冷凝口出水温度T3A | 摄氏度 | condensate_outlet_water_temperature_T3A |
+| 20 | 3011 | 冷凝口出水温度T3B | 摄氏度 | condensate_outlet_water_temperature_T3B |
+| 21 | 3012 | 室外环境温度 | 摄氏度 | outdoor_ambient_temperature |
+| 22 | 3013 | 水侧防冻温度 | 摄氏度 | waterside_freeze_protection_temperature |
+| 23 | 3014 | 板换进口温度T6A | 摄氏度 | plate_change_inlet_temperature_T6A |
+| 24 | 3015 | 板换进口温度T6B | 摄氏度 | plate_change_inlet_temperature_T6B |
+| 25 | 3016 | 系统回气温度 | 摄氏度 | system_return_air_temperature |
+| 26 | 3017 | T2冷媒液侧温度 | 摄氏度 | T2_refrigerant_liquid_side_temperature |
+| 27 | 3018 | 总冷出温度Tz | 摄氏度 | total_cold_out_temperature_Tz |
+| 28 | 3019 | 回气饱和温度Te | 摄氏度 | return_air_saturation_temperature_Te |
+| 29 | 3020 | 排气饱和温度Tc | 摄氏度 | exhaust_air_saturation_temperature_Tc |
+| 30 | 3021 | 排气过热度TdSH |      | exhaust_air_superheat_degree_TdSH |
+| 31 | 3022 | 回气过热度TsSH |      | return_air_superheat_degree_TsSH |
+| 32 | 3023 | 电子膨胀阀EXVA |      | electronic_expansion_valve_EXVA |
+| 33 | 3024 | 电子膨胀阀EXVB |      | electronic_expansion_valve_EXVB |
+| 34 | 3025 | 电子膨胀阀EXVC |      | electronic_expansion_valve_EXVC |
+| 35 | 3026 | 电磁阀SV（BIT0-SV1 BIT1-SV2 BIT2-SV3 BIT3-SV4 BIT4-SV5 BIT5-SV6 BIT6-SV7 BIT7-SV8）|   | solenoid_valve |
+| 36 | 3027 | 其他负载（BIT0-ST四通阀 BIT1-Cycpump水泵 BIT2-PanHeat底盘电加热 BIT3-Heat1辅助电加热 BIT4-Heat2靶流电加热 BIT5-FrostHeat防冻加热带 BIT7-Crank压缩机加热带）| | other_loads |
+| 37 | 3028 | 风挡1 |    | windscreen_1 |
+| 38 | 3029 | 风挡2 |    | windscreen_2 |
+| 39 | 3030 | 频率1 |    | frequency_1 |
+| 40 | 3031 | 排气温度1 |    | exhaust_air_temperature_1 |
+| 41 | 3032 | 散热器温度1 |   | heat_sink_temperature_1 |
+| 42 | 3033 | 电流1 |    | current_1 |
+| 43 | 3034 | 频率2 |    | frequency_2 |
+| 44 | 3035 | 排气温度2 |    | exhaust_air_temperature_2 |
+| 45 | 3036 | 散热器温度2 |   | heat_sink_temperature_2 |
+| 46 | 3037 | 电流2 |    | current_2 |
+| 47 | 3038 | 高压压力 |    | high_pressure |
+| 48 | 3039 | 低压压力 |    | low_pressure |
+
 
 
 

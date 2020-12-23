@@ -19,7 +19,7 @@ from datetime import datetime
 
 import logging
 
-logging.basicConfig(filename='air_log1111.log', level=logging.INFO)  # WARNING DEBUG
+logging.basicConfig(filename='air_log1223.log', level=logging.INFO)  # WARNING DEBUG
 log = logging.getLogger()
 
 def air_modbus2mongodb_next():
@@ -32,19 +32,19 @@ def air_modbus2mongodb_next():
                                authSource='admin',
                                serverSelectionTimeoutMS=2000)
 
-        try:  # 数据库连接测试
-            # The ismaster command is cheap and does not require auth.
-            DBclient.admin.command('ismaster')
-        except ConnectionFailure as e:  # Exception
-            DBclient.close()
-            log.error(e)
-            # print("Server not available")
-            return
+        # try:  # 数据库连接测试
+        #     # The ismaster command is cheap and does not require auth.
+        #     DBclient.admin.command('ismaster')
+        # except ConnectionFailure as e:  # Exception
+        #     DBclient.close()
+        #     log.error(e)
+        #     # print("Server not available")
+        #     return
 
         db = DBclient['sensor_management']
         # collection = db['air_condition']
-        collection = db['data_test_air_']
-        logger = db['air_condition_logger']
+        collection = db['data_test_ac_1223']
+        logger = db['air_condition_logger_1223']
 
         equipments = [{} for i in range(len(ads.equipment_index))]
         for i in range(9):  # 9根总线读数据

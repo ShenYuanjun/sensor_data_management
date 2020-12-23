@@ -15,11 +15,12 @@ import xlwt
 import logging
 
 filename = 'totaldata.json'
-logging.basicConfig(filename='air_log1211.log', level=logging.INFO)  # WARNING DEBUG
+file_excel = 'totaldata1221.xls'
+logging.basicConfig(filename='air_log1221.log', level=logging.INFO)  # WARNING DEBUG
 log = logging.getLogger()
 
 A = 24*4  # 循环次数
-v = 15  # 循环间隔分钟数 需大于等于1
+v = 5  # 循环间隔分钟数 需大于等于1
 
 bus1 = [0, 1, 2, 3, 4]  # 总线12345
 ads1 = [
@@ -279,7 +280,7 @@ try:
                     continue
         worksheet.write(kk + 1, 0, str(a))
 
-    workbook.save('totaldata1210.xls')
+    workbook.save(file_excel)
 except Exception as e:
     log.error(e)
 finally:

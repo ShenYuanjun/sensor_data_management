@@ -146,55 +146,59 @@ buses.append([
 ])  # 8
 
 # [变量名, 寄存器地址, 数据长度]
-buses.append([
+bus_meter = [
     ['current_combine_total_active_energy', 0x0000, 2],  # 当前组合有功总电能
     ['current_positive_total_active_energy', 0x000A, 2],  # 当前正向有功总电能
     ['current_negative_total_active_energy', 0x0014, 2],  # 当前反向有功总电能
     ['current_total_useless_energy', 0x0186, 2],  # 当前无功总电能
-    ['voltage_A', 0x0300, 1],  # A相电压
-    ['voltage_B', 0x0301, 1],  # B相电压
-    ['voltage_C', 0x0302, 1],  # C相电压
-    ['electric_current_A', 0x0303, 1],  # A相电流
-    ['electric_current_B', 0x0304, 1],  # B相电流
-    ['electric_current_C', 0x0305, 1],  # C相电流
-    ['instant_active_power_A', 0x0306, 1],  # 瞬时A相有功功率
-    ['instant_active_power_B', 0x0307, 1],  # 瞬时B相有功功率
-    ['instant_active_power_C', 0x0308, 1],  # 瞬时C相有功功率
+    # ['voltage_A', 0x0300, 1],  # A相电压
+    # ['voltage_B', 0x0301, 1],  # B相电压
+    # ['voltage_C', 0x0302, 1],  # C相电压
+    # ['electric_current_A', 0x0303, 1],  # A相电流
+    # ['electric_current_B', 0x0304, 1],  # B相电流
+    # ['electric_current_C', 0x0305, 1],  # C相电流
+    # ['instant_active_power_A', 0x0306, 1],  # 瞬时A相有功功率
+    # ['instant_active_power_B', 0x0307, 1],  # 瞬时B相有功功率
+    # ['instant_active_power_C', 0x0308, 1],  # 瞬时C相有功功率
     ['instant_total_active_power', 0x0309, 1],  # 瞬时总有功功率
-    ['instant_useless_power_A', 0x030A, 1],  # 瞬时A相无功功率
-    ['instant_useless_power_B', 0x030B, 1],  # 瞬时B相无功功率
-    ['instant_useless_power_C', 0x030C, 1],  # 瞬时C相无功功率
+    # ['instant_useless_power_A', 0x030A, 1],  # 瞬时A相无功功率
+    # ['instant_useless_power_B', 0x030B, 1],  # 瞬时B相无功功率
+    # ['instant_useless_power_C', 0x030C, 1],  # 瞬时C相无功功率
     ['instant_useless_total_power', 0x030D, 1],  # 瞬时总无功功率
-    ['instant_apparent_power_A', 0x030E, 1],  # 瞬时A相视在功率
-    ['instant_apparent_power_B', 0x030F, 1],  # 瞬时B相视在功率
-    ['instant_apparent_power_C', 0x0310, 1],  # 瞬时C相视在功率
+    # ['instant_apparent_power_A', 0x030E, 1],  # 瞬时A相视在功率
+    # ['instant_apparent_power_B', 0x030F, 1],  # 瞬时B相视在功率
+    # ['instant_apparent_power_C', 0x0310, 1],  # 瞬时C相视在功率
     ['instant_apparent_total_power', 0x0311, 1],  # 瞬时总视在功率
-    ['power_factor_A', 0x0312, 1],  # A相功率因素
-    ['power_factor_B', 0x0313, 1],  # B相功率因素
-    ['power_factor_C', 0x0314, 1],  # C相功率因素
+    # ['power_factor_A', 0x0312, 1],  # A相功率因素
+    # ['power_factor_B', 0x0313, 1],  # B相功率因素
+    # ['power_factor_C', 0x0314, 1],  # C相功率因素
     ['power_factor_total', 0x0315, 1],  # 总功率因素
     ['frequency', 0x0316, 1],  # 频率
-
-])  # 9 meter
+]  # 9 meter
 
 # [变量名, 寄存器地址]
-buses.append([
-    ['total_outlet_water_temperature', 101],  # 总出水温度
-    ['equipment_online_status', 102],  # 机组在线状态
-    ['operating_mode', 3005],  # 运行模式
-    ['operating_energy_requirements', 3006],  # 运行能需
-    ['total_outlet_water_temperature_Tw', 3007],  # 总出水温度Tw
-    ['unit_outlet_water_temperature', 3008],  # 单元出水温度
-    ['unit_inlet_water_temperature', 3009],  # 单元进水温度
-    ['condensate_outlet_water_temperature_T3A', 3010],  # 冷凝口出水温度T3A
-    ['condensate_outlet_water_temperature_T3B', 3011],  # 冷凝口出水温度T3B
-    ['outdoor_ambient_temperature', 3012],  # 室外环境温度
-    ['plate_change_inlet_temperature_T6A', 3014],  # 板换进口温度T6A
-    ['plate_change_inlet_temperature_T6B', 3015],  # 板换进口温度T6B
-    ['system_return_air_temperature', 3016],  # 系统回气温度
-    ['T2_refrigerant_liquid_side_temperature', 3017],  # T2冷媒液侧温度
+# buses.append([
+#     ['total_outlet_water_temperature', 101],  # 总出水温度
+#     ['equipment_online_status', 102],  # 机组在线状态
+#     ['operating_mode', 3005],  # 运行模式
+#     ['operating_energy_requirements', 3006],  # 运行能需
+#     ['total_outlet_water_temperature_Tw', 3007],  # 总出水温度Tw
+#     ['unit_outlet_water_temperature', 3008],  # 单元出水温度
+#     ['unit_inlet_water_temperature', 3009],  # 单元进水温度
+#     ['condensate_outlet_water_temperature_T3A', 3010],  # 冷凝口出水温度T3A
+#     ['condensate_outlet_water_temperature_T3B', 3011],  # 冷凝口出水温度T3B
+#     ['outdoor_ambient_temperature', 3012],  # 室外环境温度
+#     ['plate_change_inlet_temperature_T6A', 3014],  # 板换进口温度T6A
+#     ['plate_change_inlet_temperature_T6B', 3015],  # 板换进口温度T6B
+#     ['system_return_air_temperature', 3016],  # 系统回气温度
+#     ['T2_refrigerant_liquid_side_temperature', 3017],  # T2冷媒液侧温度
+#
+# ])  # 10 host
 
-])  # 10 host
+bus_host = [
+    ['state_100', 100, 3],
+    ['state_3000', 3000, 40],
+]
 
 # tank_ref = [['cool_temperature', 1, 1],
 #             ['cool_temperatue1', 1, 13],

@@ -20,14 +20,11 @@ from datetime import datetime
 
 import logging
 
-logging.basicConfig(filename='ac_log1208.log', level=logging.INFO)  # WARNING DEBUG
+logging.basicConfig(filename='ac_log1223.log', level=logging.INFO)  # WARNING DEBUG
 log = logging.getLogger()
 
-ac_N = [14, 2, 4, 14, 5]
-ac_L = [3, 6, 3, 6]
 
-
-def env_modbus2mongodb():
+def ac_modbus2mongodb():
     try:
         t = time()
 
@@ -37,7 +34,7 @@ def env_modbus2mongodb():
                                authSource='admin',
                                serverSelectionTimeoutMS=1000)
 
-        # try:  # test db connect
+        # try:  # 数据库连接测试
         #     # The ismaster command is cheap and does not require auth.
         #     DBclient.admin.command('ismaster')
         # except ConnectionFailure as e:  # Exception
@@ -47,86 +44,219 @@ def env_modbus2mongodb():
         #     return
 
         db = DBclient['sensor_management']
-        collection = db['air_condition_test_1208']
+        # collection = db['air_condition']
+        collection = db['data_test_ac_1223']
+        logger = db['air_condition_logger_1223']
 
-        for i in range(5):
+        equipments = [{} for i in range(9)]
+        for i in range(5):  # 12345总线读数据
             client = ModbusClient(ads.conn[i][0], port=ads.conn[i][1], timeout=3, framer=ModbusFramer)
+            bus = ads.buses[i]
+
             is_connected = client.connect()
             if not is_connected:  # modbus连接失败
-                data_db = {'name': '{:0>2d}xx'.format(i + 1),
+                data_db = {'name': 'bus{:0>1d}'.format(i + 1),
                            'err': 'Modbus Connect Failed',
                            'datetime': datetime.now()}
-                result = collection.insert_one(data_db)
+                result = logger.insert_one(data_db)
                 client.close()
                 sleep(1)
                 continue
-            for j in range(ac_N[i]):
-                sleep(1)
-                rr = client.read_holding_registers(ads.rgs_start + j * ads.rgs_len, ads.len_data, unit=ads.box_ads)
-                if not hasattr(rr, 'registers'):  # 无返回数据
-                    data_db = {'name': '{:0>2d}{:0>2d}xx:'.format(i + 1, j + 1),
-                               'message': rr.message,
-                               'err': 'No Data Return',
-                               'datetime': datetime.now()}
-                    result = collection.insert_one(data_db)
-                    continue
-                data_modbus = rr.registers
-                err_d = True
-                for k in range(4):
-                    if (data_modbus[k] != 0):
-                        err_d = False
-                        break
-                    pass
-                if err_d:
-                    data_db = {'name': '{:0>2d}{:0>2d}'.format(i + 1, j + 1),
-                               'data': data_modbus,
-                               'err': 'All Null',
-                               'datetime': datetime.now()}
+
+            sleep(1)
+            rr = client.read_coils(ads.rgs_start, ads.len_data, unit=ads.box_ads)
+            if hasattr(rr, 'bits'):
+                checkout = rr.bits
+            else:
+                data_db = {'name': 'bus{:0>1d}:'.format(i + 1),
+                           'message': rr.message,
+                           'err': 'Checkout Failed',
+                           'datetime': datetime.now()}
+                result = logger.insert_one(data_db)
+                checkout = [True for i in range(16)]
+
+            for j in range(len(bus)):
+                if checkout[j]:
+                    sleep(1)
+                    rr = client.read_holding_registers(ads.rgs_start + j * ads.rgs_len, ads.len_data, unit=ads.box_ads)
+                    if not hasattr(rr, 'registers'):  # 无返回数据
+                        data_db = {
+                            'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[bus[j][0]] + '-' + bus[j][1],
+                            'message': rr.message,
+                            'err': 'No Data Return',
+                            'datetime': datetime.now()}
+                        result = logger.insert_one(data_db)
+                        continue
+                    data_modbus = rr.registers
+                    type = data_modbus[0] // 256  # 数据类型
+                    if type != bus[j][2]:
+                        data_db = {
+                            'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[bus[j][0]] + '-' + bus[j][1],
+                            'data': data_modbus,
+                            'err': 'Wrong Type Index: Should be 0x{:0X}, but accepted 0x{:0X}'.format(bus[j][2],
+                                                                                                      type),
+                            'datetime': datetime.now()}
+                        result = logger.insert_one(data_db)
+                        continue
+                    pos = data_modbus[0] % 16  # 小数位数
+                    sign_n = data_modbus[0] % 256 - pos  ## 有无符号
+                    if sign_n == 0x80:
+                        sign = True  # 有符号
+                    elif sign_n == 0x00:
+                        sign = False  # 无符号
+                    else:
+                        data_db = {
+                            'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[bus[j][0]] + '-' + bus[j][1],
+                            'data': data_modbus,
+                            'err': 'Wrong Sign Index: Should be 0x{:0X} or 0x{:0X}, but accepted 0x{:0X}'.format(
+                                0x80, 0x00, sign_n),
+                            'datetime': datetime.now()}
+                        result = logger.insert_one(data_db)
+                        continue
+                    data_origin = data_modbus[1]
+                    if sign and data_origin >= 32767:
+                        data = -(65536 - data_origin) / (10 ** pos)
+                    else:
+                        data = data_origin / (10 ** pos)
+                    equipments[bus[j][0]][bus[j][1]] = data
+
                 else:
-                    data_db = {'name': '{:0>2d}{:0>2d}'.format(i + 1, j + 1),
-                               'data': data_modbus,
+                    data_db = {'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[bus[j][0]] + '-' + bus[j][1],
+                               'data': checkout,
+                               'err': 'The Sensor Is Outline',
                                'datetime': datetime.now()}
-                result = collection.insert_one(data_db)
+                    result = logger.insert_one(data_db)
             client.close()
 
-        for i in range(5, 9):
+        for i in range(5, 9):  # 6789总线读数据
             client = ModbusClient(ads.conn[i][0], port=ads.conn[i][1], timeout=3, framer=ModbusFramer)
+            bus = ads.buses[i]
+
             is_connected = client.connect()
             if not is_connected:  # modbus连接失败
-                data_db = {'name': '{:0>2d}xx'.format(i + 1),
+                data_db = {'name': 'bus{:0>1d}'.format(i + 1),
                            'err': 'Modbus Connect Failed',
                            'datetime': datetime.now()}
-                result = collection.insert_one(data_db)
+                result = logger.insert_one(data_db)
                 client.close()
                 sleep(1)
                 continue
+
             sleep(1)
-            rr = client.read_holding_registers(0x00, ac_L[i-5] * 2, unit=0x01)
+            rr = client.read_holding_registers(ads.rgs_start, ads.len_data, unit=ads.box_ads)
             if not hasattr(rr, 'registers'):  # 无返回数据
-                data_db = {'name': '{:0>2d}xx:'.format(i + 1),
+                data_db = {'name': 'bus{:0>1d}:'.format(i + 1),
                            'message': rr.message,
                            'err': 'No Data Return',
                            'datetime': datetime.now()}
-                result = collection.insert_one(data_db)
+                result = logger.insert_one(data_db)
                 continue
             data_modbus = rr.registers
-            err_d = True
-            for k in range(ac_L[i-5] * 2):
-                if (data_modbus[k] != 0):
-                    err_d = False
-                    break
-                pass
-            if err_d:
-                data_db = {'name': '{:0>2d}'.format(i + 1),
-                           'data': data_modbus,
-                           'err': 'All Null',
-                           'datetime': datetime.now()}
-            else:
-                data_db = {'name': '{:0>2d}'.format(i + 1),
-                           'data': data_modbus,
-                           'datetime': datetime.now()}
-            result = collection.insert_one(data_db)
+            for j in range(len(bus)):
+                type = data_modbus[2 * j] // 4096  # 数据类型 C0
+                if type != 12:
+                    data_db = {'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[bus[j][0]] + '-' + bus[j][1],
+                               'data': data_modbus,
+                               'err': 'Wrong Type Index: Should be 0xC0, but accepted 0x{:0X}'.format(type),
+                               'datetime': datetime.now()}
+                    result = logger.insert_one(data_db)
+                    continue
+                pos = data_modbus[0] % 256  # 小数位数
+                data_origin = data_modbus[2 * j + 1] / (10 ** pos)
+                inf0 = ads.i2v[0][0]
+                sup0 = ads.i2v[0][1]
+                inf1 = ads.i2v[bus[j][2]][0]
+                sup1 = ads.i2v[bus[j][2]][1]
+                if inf0 <= data_origin <= sup0:
+                    data = (data_origin - inf0) / (sup0 - inf0) * (sup1 - inf1) + inf1
+                else:
+                    data_db = {'name': 'bus{:0>1d}:'.format(i + 1) + ads.equipment_index[bus[j][0]] + '-' + bus[j][1],
+                               'data': data_modbus,
+                               'err': 'Wrong Value Range: Should be 4~20, but accepted {:0X}'.format(data_origin),
+                               'datetime': datetime.now()}
+                    result = logger.insert_one(data_db)
+                    continue
+                equipments[bus[j][0]][bus[j][1]] = data
             client.close()
+
+        # for eqt in range(9):  # 9个设备写入数据库
+        #     data_db = {'name': ads.equipment_index[eqt],
+        #                'data': equipments[eqt],
+        #                'datetime': datetime.now()}
+        #     result = collection.insert_one(data_db)
+        data_db = []
+        for eqt in range(9):  # 9个设备写入数据库
+            data_db.append({'name': ads.equipment_index[eqt],
+                            'data': equipments[eqt],
+                            'datetime': datetime.now()})
+        result = collection.insert_many(data_db)
+
+        # meter
+        client = ModbusClient(ads.conn[9][0], port=ads.conn[9][1], timeout=3, framer=ModbusFramer)
+        bus = ads.bus_meter
+        is_connected = client.connect()
+        if is_connected:  # modbus连接失败
+            data = {}
+            for i in range(len(bus)):
+                sleep(1)
+                rr = client.read_holding_registers(bus[i][1], bus[i][2], unit=ads.box_ads)
+                if not hasattr(rr, 'registers'):  # 无返回数据
+                    data_db = {'name': 'meter',
+                               'message': rr.message,
+                               'err': 'No Data Return',
+                               'datetime': datetime.now()}
+                    result = logger.insert_one(data_db)
+                    continue
+                data_modbus = rr.registers
+                value = 0
+                for j in range(bus[i][2]):
+                    value += data_modbus[j] * 0x10000 ** (bus[i][2] - j - 1)
+                data[bus[i][0]] = value
+            client.close()
+            data_db = {'name': 'meter',
+                       'data': data,
+                       'datetime': datetime.now()}
+            result = collection.insert_one(data_db)
+        else:
+            data_db = {'name': 'bus_meter',
+                       'err': 'Modbus Connect Failed',
+                       'datetime': datetime.now()}
+            result = logger.insert_one(data_db)
+            client.close()
+            sleep(1)
+
+        # host
+        client = ModbusClient(ads.conn[10][0], port=ads.conn[10][1], timeout=3, framer=ModbusFramer)
+        bus = ads.bus_host
+        is_connected = client.connect()
+        if is_connected:  # modbus连接失败
+            data = {}
+            for i in range(len(bus)):
+                sleep(1)
+                rr = client.read_holding_registers(bus[i][1], bus[i][2], unit=ads.box_ads)
+                if not hasattr(rr, 'registers'):  # 无返回数据
+                    data_db = {'name': 'host',
+                               'message': rr.message,
+                               'err': 'No Data Return',
+                               'datetime': datetime.now()}
+                    result = logger.insert_one(data_db)
+                    continue
+                data_modbus = rr.registers
+                data[bus[i][0]] = data_modbus
+            client.close()
+            # data_db = {'name': 'meter',
+            #            'data': data,
+            #            'datetime': datetime.now()}
+            data['name'] = 'host'
+            data['datetime'] = datetime.now()
+            result = collection.insert_one(data)
+        else:
+            data_db = {'name': 'bus_host',
+                       'err': 'Modbus Connect Failed',
+                       'datetime': datetime.now()}
+            result = logger.insert_one(data_db)
+            client.close()
+            sleep(1)
 
     except ConnectionFailure as e:
         log.error(e)
@@ -152,7 +282,7 @@ if __name__ == '__main__':
     scheduler = BackgroundScheduler(job_defaults=job_defaults)  # jobstores=jobstores
     # scheduler.add_job(env_modbus2mongodb_next, 'interval', seconds=300, id='env_bus2db',
     #                   replace_existing=True)
-    scheduler.add_job(env_modbus2mongodb, trigger=trigger, id='env_bus2db',
+    scheduler.add_job(ac_modbus2mongodb, trigger=trigger, id='env_bus2db',
                       replace_existing=True)  # , jobstore='mongo'
     scheduler.start()
     log.info('Start Time: ' + str(datetime.now()))

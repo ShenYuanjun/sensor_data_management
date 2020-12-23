@@ -19,7 +19,7 @@ from datetime import datetime
 
 import logging
 
-logging.basicConfig(level=logging.INFO)  # WARNING  DEBUGfilename='air_log1208.log',
+logging.basicConfig(level=logging.DEBUG, filename='air_log1219.log')  # WARNING INFO
 log = logging.getLogger()
 
 try:
@@ -72,7 +72,7 @@ try:
             result = logger.insert_one(data_db)
             checkout = [True for i in range(16)]
 
-        for j in range(ads.bus_sensor_number[i]):
+        for j in range(len(bus)):
             if checkout[j]:
                 sleep(1)
                 rr = client.read_holding_registers(ads.rgs_start + j * ads.rgs_len, ads.len_data, unit=ads.box_ads)
@@ -184,6 +184,74 @@ try:
                         'data': equipments[eqt],
                         'datetime': datetime.now()})
     result = collection.insert_many(data_db)
+
+    # meter
+    client = ModbusClient(ads.conn[9][0], port=ads.conn[9][1], timeout=3, framer=ModbusFramer)
+    bus = ads.bus_meter
+    is_connected = client.connect()
+    if is_connected:  # modbus连接失败
+        data = {}
+        for i in range(len(bus)):
+            sleep(1)
+            rr = client.read_holding_registers(bus[i][1], bus[i][2], unit=ads.box_ads)
+            if not hasattr(rr, 'registers'):  # 无返回数据
+                data_db = {'name': 'meter',
+                           'message': rr.message,
+                           'err': 'No Data Return',
+                           'datetime': datetime.now()}
+                result = logger.insert_one(data_db)
+                continue
+            data_modbus = rr.registers
+            value = 0
+            for j in range(bus[i][2]):
+                value += data_modbus[j] * 0x10000 ** (bus[i][2] - j - 1)
+            data[bus[i][0]] = value
+        client.close()
+        data_db = {'name': 'meter',
+                   'data': data,
+                   'datetime': datetime.now()}
+        result = collection.insert_one(data_db)
+    else:
+        data_db = {'name': 'bus_meter',
+                   'err': 'Modbus Connect Failed',
+                   'datetime': datetime.now()}
+        result = logger.insert_one(data_db)
+        client.close()
+        sleep(1)
+
+
+    # host
+    client = ModbusClient(ads.conn[10][0], port=ads.conn[10][1], timeout=3, framer=ModbusFramer)
+    bus = ads.bus_host
+    is_connected = client.connect()
+    if is_connected:  # modbus连接失败
+        data = {}
+        for i in range(len(bus)):
+            sleep(1)
+            rr = client.read_holding_registers(bus[i][1], bus[i][2], unit=ads.box_ads)
+            if not hasattr(rr, 'registers'):  # 无返回数据
+                data_db = {'name': 'host',
+                           'message': rr.message,
+                           'err': 'No Data Return',
+                           'datetime': datetime.now()}
+                result = logger.insert_one(data_db)
+                continue
+            data_modbus = rr.registers
+            data[bus[i][0]] = data_modbus
+        client.close()
+        # data_db = {'name': 'meter',
+        #            'data': data,
+        #            'datetime': datetime.now()}
+        data['name'] = 'host'
+        data['datetime'] = datetime.now()
+        result = collection.insert_one(data)
+    else:
+        data_db = {'name': 'bus_host',
+                   'err': 'Modbus Connect Failed',
+                   'datetime': datetime.now()}
+        result = logger.insert_one(data_db)
+        client.close()
+        sleep(1)
 
 
 except ConnectionFailure as e:  # Exception
