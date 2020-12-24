@@ -93,13 +93,13 @@ buses.append([
     [4, 'terminal_supply_return_pip_pressure', 0x82],  # 末端供水回水管压力
     [4, 'pump_inlet_pip_pressure', 0x82],  # 设备循环泵进水管压力
     [4, 'domestic_hot_water_inlet_pip_pressure', 0x82],  # 生活热水进水管压力
-    [7, 'inlet_pip_temperature', 0x01],  # vip室顶上空调进水管温度
+    [4, 'pump_inlet_pip_temperature', 0x01],  # 设备循环泵进水管温度
     [7, 'return_pip_temperature', 0x01],  # vip室顶上空调回水管温度
     [8, 'inlet_pip_temperature', 0x01],  # 调度室顶上空调进水管温度
     [8, 'return_pip_temperature', 0x01],  # 调度室顶上空调回水管温度
-    [4, 'terminal_supply_return_pip_temperature', 0x01],  # 末端供水回水管温度
+    [7, 'inlet_pip_temperature', 0x01],  # vip室顶上空调进水管温度
     [4, 'terminal_supply_inlet_pip_temperature', 0x01],  # 末端供水进水管温度
-    [4, 'pump_inlet_pip_temperature', 0x01],  # 设备循环泵进水管温度
+    [4, 'terminal_supply_return_pip_temperature', 0x01],  # 末端供水回水管温度
     [4, 'domestic_hot_water_inlet_pip_temperature', 0x01],  # 生活热水进水管温度
     [4, 'pump_return_pip_temperature', 0x01],  # 设备循环泵回水管温度
 ])  # 3
