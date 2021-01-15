@@ -273,7 +273,17 @@ XXX| 05 | 0x00 0x00 | 0x01 | 调度间空调出风湿度 |
 | 47 | 3038 | 高压压力 |    | high_pressure |
 | 48 | 3039 | 低压压力 |    | low_pressure |
 
-
+### 房间电表
+| | 寄存器地址| 含义 | 数据长度 | 变量 |
+| :---: | :---: | :---: | :---: | :---: |
+| 01 | 0x2000 | A相电压 | 2 | voltage |
+| 02 | 0x2002 | A相电流 | 2 | electric_current |
+| 03 | 0x2004 | 瞬时总有功功率 | 2 | instant_total_active_power |
+| 04 | 0x2006 | 瞬时总无功功率 | 2 | instant_useless_total_power |
+| 05 | 0x2008 | 瞬时总视在功率 | 2 | instant_apparent_total_power |
+| 06 | 0x200A | 总功功率因数 | 2 | power_factor_total |
+| 07 | 0x200E | 电网频率 | 2 | grid_frequency |
+| 08 | 0x4000 | 有功总电能 | 2 | total_active_energy |
 
 
 
