@@ -45,25 +45,64 @@ def power_modbus2mongodb():
 
         db = DBclient['sensor_management']
         # collection = db['air_condition']
-        collection = db['power_test_0115']
+        collection = db['power_test_0116']
 
-        name=['room1','room2','room4']
-        gateway=[24,48,87]
-        register=[0x2000,0x4000]
-        length=[18,2]
+        name = ['room1', 'room2', 'room4']
+        gateway = [24, 48, 87]
+        register = [0x2000, 0x4000]
+        length = [18, 2]
+
+        var_n = [
+            [
+                ['voltage', 0],
+                ['electric_current', 2],
+                ['instant_total_active_power', 4],
+                ['instant_useless_total_power', 6],
+                ['instant_apparent_total_power', 8],
+                ['power_factor_total', 10],
+                ['grid_frequency', 14],
+            ],
+            [
+                ['total_active_energy', 0]
+            ]
+        ]
 
         client = ModbusClient('192.168.1.146', port=12345, timeout=3, framer=ModbusFramer)
         is_connected = client.connect()
         if is_connected:  # modbus connect fail
             for i in range(3):
-                data=[]
+                data = {}
                 for j in range(2):
                     sleep(1)
                     rr = client.read_holding_registers(register[j], length[j], unit=gateway[i])
-                    if hasattr(rr, 'registers'):  # no data return
-                        data.append(rr.registers)
-                    else:
-                        data.append('No Data Return')
+                    if hasattr(rr, 'registers'):
+                        # data_modbus = {}
+                        for v in var_n[j]:
+
+                            # IEEE-754 hex to float
+                            B = '{:0>16b}{:0>16b}'.format(rr.registers[v[1]], rr.registers[v[1] + 1])
+                            s = int(B[0])
+                            e = int(B[1:9], 2) - 127
+                            M = B[9:32]
+                            if e > 0:
+                                Mi = int('1' + M[0:e], 2)
+                                Mf = M[e:23]
+                            elif e == 0:
+                                Mi = 1.0
+                                Mf = M
+                            else:
+                                Mi = 0.0
+                                Mf = '1' + M
+                                for k in range(-e - 1):
+                                    Mf = '0' + Mf
+                            xm = 0.0
+                            for k in range(len(Mf)):
+                                xm += int(Mf[k]) / 2 ** (k + 1)
+                            x = (-1) ** s * (Mi + xm)
+
+                            data[v[0]] = x
+                    else:  # no data return
+                        data['0x{:4x}'.format(register[j])] = 'No Data Return'
                 data_db = {'name': name[i],
                            'data': data,
                            'datetime': datetime.now()}
